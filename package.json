@@ -13,6 +13,7 @@
     "commit": "cz"
   },
   "dependencies": {
+    "@vant/touch-emulator": "^1.4.0",
     "axios": "^1.1.3",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.21",
