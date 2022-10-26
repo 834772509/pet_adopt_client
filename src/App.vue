@@ -1,5 +1,5 @@
 <template>
-  <div class="tab-bar">
+  <div class="tab-bar" v-show="route.meta.showTabBar !== false">
     <van-tabbar route>
       <van-tabbar-item replace to="/" icon="home-o">主页</van-tabbar-item>
       <van-tabbar-item replace to="/publish" icon="guide-o">
@@ -13,7 +13,9 @@
 </template>
 
 <script lang="ts" setup>
-import { RouterView } from "vue-router";
+import { RouterView, useRoute } from "vue-router";
+
+const route = useRoute();
 </script>
 
 <style scoped></style>
