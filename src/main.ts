@@ -2,8 +2,9 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
-import "normalize.css";
 import "@vant/touch-emulator";
+import "normalize.css";
+import "./assets/css/index.less";
 
 const app = createApp(App);
 
