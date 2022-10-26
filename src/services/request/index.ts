@@ -4,6 +4,7 @@ import axios, {
   type AxiosResponse,
 } from "axios";
 import type { Result } from "./types";
+import { useLoginStore } from "@/stores";
 
 class request {
   private instance: AxiosInstance;
@@ -16,10 +17,10 @@ class request {
 
     this.instance.interceptors.request.use(
       (config) => {
-        // const token = useUserStore().getToken;
-        // if (token) {
-        // config.headers.Authorization = `Bearer ${token}`;
-        // }
+        const token = useLoginStore().token;
+        if (token) {
+          config!.headers!.Authorization = `Bearer ${token}`;
+        }
         return config;
       },
       (err) => {
@@ -71,4 +72,7 @@ class request {
   }
 }
 
-export default request;
+export default new request({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  timeout: 3000,
+});
