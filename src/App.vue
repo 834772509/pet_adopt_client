@@ -3,12 +3,13 @@
     :title="route.meta.title as string || ''"
     :left-arrow="route.meta.showTabBar !== true"
     @click-left="router.back()"
+    fixed
   />
   <div class="app">
     <RouterView />
   </div>
   <div class="tab-bar" v-show="route.meta.showTabBar !== false">
-    <van-tabbar route>
+    <van-tabbar placeholder route>
       <van-tabbar-item replace to="/" icon="home-o">主页</van-tabbar-item>
       <van-tabbar-item replace to="/publish" icon="guide-o">
         发布
