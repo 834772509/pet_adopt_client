@@ -1,6 +1,7 @@
 <template>
   <div class="login">
     <img class="logo" src="@/assets/images/logo.png" alt="logo" />
+    <h3>登录账户</h3>
     <van-form @submit="onSubmit">
       <van-cell-group inset>
         <van-field
@@ -50,6 +51,8 @@
 import { ref } from "vue";
 import localCache from "@/utils/cache";
 import { useLoginStore } from "@/stores";
+import { Dialog } from "vant";
+import "vant/es/dialog/style";
 
 const isKeepPassword = ref(true);
 const username = ref("");
@@ -65,18 +68,29 @@ const onSubmit = () => {
     localCache.deleteCache("name");
     localCache.deleteCache("password");
   }
-  loginStore.accountLoginAction(username.value, password.value);
+  loginStore
+    .accountLoginAction(username.value, password.value)
+    .then(() => {
+      console.log("登录成功");
+    })
+    .catch(() => {
+      console.log("账号或密码不正确");
+      Dialog.alert({
+        message: "账号或密码不正确",
+      });
+    });
 };
 </script>
 
 <style lang="less" scoped>
 .login {
-  height: 70%;
+  height: 100%;
   flex-wrap: wrap;
+  flex-direction: column;
   justify-content: center; //子元素水平居中
   align-items: center; //子元素垂直居中
   display: flex;
-
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   .logo {
     width: 10rem;
     height: 10rem;
@@ -86,8 +100,9 @@ const onSubmit = () => {
     display: flex;
     justify-content: space-evenly;
     .btn-register {
-      width: 5rem;
+      width: 6rem;
       margin-top: 0.25rem;
+      margin-right: 0.5rem;
     }
   }
 }
