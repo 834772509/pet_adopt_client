@@ -1,22 +1,29 @@
 <template>
-  <div>
+  <div class="swipe-picture">
     <van-swipe class="my-swipe" :autoplay="3000" indicator-color="white">
-      <van-swipe-item>1</van-swipe-item>
-      <van-swipe-item>2</van-swipe-item>
-      <van-swipe-item>3</van-swipe-item>
-      <van-swipe-item>4</van-swipe-item>
+      <van-swipe-item>
+        <img class="picture" src="@/assets/images/banner/banner1.webp" />
+      </van-swipe-item>
+      <van-swipe-item>
+        <img class="picture" src="@/assets/images/banner/banner2.webp" />
+      </van-swipe-item>
     </van-swipe>
   </div>
 </template>
 
 <script setup lang="ts"></script>
 
-<style scoped>
-.my-swipe .van-swipe-item {
-  color: #fff;
-  font-size: 20px;
-  line-height: 150px;
-  text-align: center;
-  background-color: #39a9ed;
+<style lang="less" scoped>
+.swipe-picture {
+  .my-swipe .van-swipe-item {
+    color: #39a9ed;
+    width: 100%;
+    height: 10rem;
+
+    .picture {
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 </style>
