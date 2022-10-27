@@ -8,6 +8,7 @@ const router = createRouter({
       path: "/",
       name: "home",
       meta: {
+        title: "拾宠 - 宠物领养平台",
         showTabBar: true,
       },
       component: HomeView,
@@ -16,6 +17,7 @@ const router = createRouter({
       path: "/mine",
       name: "mine",
       meta: {
+        title: "我的",
         showTabBar: true,
       },
       component: () => import("../views/mine/mine.vue"),
@@ -24,6 +26,7 @@ const router = createRouter({
       path: "/publish",
       name: "publish",
       meta: {
+        title: "送养宠物信息",
         showTabBar: true,
       },
       component: () => import("../views/publish/publish.vue"),
@@ -32,6 +35,7 @@ const router = createRouter({
       path: "/register",
       name: "register",
       meta: {
+        title: "注册账户",
         showTabBar: false,
       },
       component: () => import("../views/register/register.vue"),
@@ -40,6 +44,7 @@ const router = createRouter({
       path: "/login",
       name: "login",
       meta: {
+        title: "登录账户",
         showTabBar: true,
       },
       component: () => import("../views/login/login.vue"),
