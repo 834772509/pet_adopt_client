@@ -11,7 +11,6 @@ export const useLoginStore = defineStore("login", {
   actions: {
     async accountLoginAction(username: string, password: string) {
       // 1.实现登录逻辑
-      // return new Promise(async (resolve, reject) => {
       const loginResult = await accountLoginRequest(username, password);
 
       const { id, token } = loginResult.data;
@@ -25,9 +24,6 @@ export const useLoginStore = defineStore("login", {
 
       // 4. 跳转到首页
       router.push("/");
-
-      // resolve("login success");
-      // });
     },
     loadLocalLogin() {
       const token = localCache.getCache("token");

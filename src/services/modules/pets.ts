@@ -1,7 +1,7 @@
 import request from "../request";
 
 // 获取宠物列表
-export function getPetsList(query: any) {
+export function getPetsList(query?: any) {
   return request.post({
     url: "/pets/list",
     data: query,
