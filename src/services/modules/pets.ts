@@ -14,3 +14,10 @@ export function getPetsCategory() {
     url: "/category/list",
   });
 }
+
+// 获取宠物城市列表
+export function getPetsCitys() {
+  return request.get({
+    url: "/pets/city/count",
+  });
+}

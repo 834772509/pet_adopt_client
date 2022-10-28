@@ -1,29 +1,23 @@
 <template>
-  <van-nav-bar
-    :title="route.meta.title as string || ''"
-    :left-arrow="route.meta.showTabBar !== true"
-    @click-left="router.back()"
-    fixed
-  />
   <div class="app">
-    <RouterView />
-  </div>
-  <div class="tab-bar" v-show="route.meta.showTabBar !== false">
-    <van-tabbar placeholder route>
-      <van-tabbar-item replace to="/" icon="home-o">主页</van-tabbar-item>
-      <van-tabbar-item replace to="/publish" icon="guide-o">
-        发布
-      </van-tabbar-item>
-      <van-tabbar-item replace to="/mine" icon="user-o">我的</van-tabbar-item>
-    </van-tabbar>
+    <!-- 顶部导航栏 -->
+    <tab-bar />
+
+    <!-- App内容 -->
+    <router-view v-slot="{ Component }">
+      <keep-alive>
+        <component :is="Component" />
+      </keep-alive>
+    </router-view>
+
+    <!-- 底部导航栏 -->
+    <nav-bar />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { RouterView, useRoute, useRouter } from "vue-router";
-
-const route = useRoute();
-const router = useRouter();
+import NavBar from "@/components/nav-bar/nav-bar.vue";
+import TabBar from "@/components/tab-bar/tab-bar.vue";
 </script>
 
 <style lang="less" scoped>
