@@ -68,17 +68,12 @@ const onSubmit = () => {
     localCache.deleteCache("name");
     localCache.deleteCache("password");
   }
-  loginStore
-    .accountLoginAction(username.value, password.value)
-    .then(() => {
-      console.log("登录成功");
-    })
-    .catch(() => {
-      console.log("账号或密码不正确");
-      Dialog.alert({
-        message: "账号或密码不正确",
-      });
+  loginStore.accountLoginAction(username.value, password.value).catch(() => {
+    console.log("账号或密码不正确");
+    Dialog.alert({
+      message: "账号或密码不正确",
     });
+  });
 };
 </script>
 

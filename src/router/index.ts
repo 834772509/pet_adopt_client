@@ -9,6 +9,7 @@ const router = createRouter({
       name: "home",
       meta: {
         title: "拾宠 - 宠物领养平台",
+        showCityPicker: true,
         showTabBar: true,
       },
       component: HomeView,
