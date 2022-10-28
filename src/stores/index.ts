@@ -1,2 +1,2 @@
 export * from "./modules/login";
-export * from "./modules/pets";
+export * from "./modules/home";

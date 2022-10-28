@@ -31,9 +31,9 @@ class request {
     this.instance.interceptors.response.use(
       (res) => {
         // 拦截响应的数据
-        if (res.data.code === 0) {
-          return res.data.data;
-        }
+        // if (res.data.code === 0) {
+        //   return res.data.data;
+        // }
         return res.data;
       },
       (err) => {

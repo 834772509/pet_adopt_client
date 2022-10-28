@@ -3,7 +3,7 @@ import { accountLoginRequest, requestUserInfoById } from "@/services";
 import localCache from "@/utils/cache";
 import router from "@/router";
 
-export const useLoginStore = defineStore("loginStore", {
+export const useLoginStore = defineStore("login", {
   state: () => ({
     token: "",
     userInfo: {} as any,
@@ -14,14 +14,13 @@ export const useLoginStore = defineStore("loginStore", {
       // return new Promise(async (resolve, reject) => {
       const loginResult = await accountLoginRequest(username, password);
 
-      const { id, token } = loginResult;
+      const { id, token } = loginResult.data;
       this.token = token;
       localCache.setCache("token", token);
 
       // 2.请求用户信息
-      const userInfoResult = requestUserInfoById(id);
-
-      this.userInfo = userInfoResult;
+      const userInfoResult = await requestUserInfoById(id);
+      this.userInfo = userInfoResult.data;
       localCache.setCache("userInfo", userInfoResult);
 
       // 4. 跳转到首页

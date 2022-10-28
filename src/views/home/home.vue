@@ -1,6 +1,8 @@
 <template>
   <div class="home">
+    <!-- 轮播图 -->
     <swipe />
+    <!-- 宠物类别选项卡 -->
     <van-tabs
       color="#39a9ed"
       v-model:active="active"
@@ -20,18 +22,15 @@
 
 <script lang="ts" setup>
 import { ref, computed } from "vue";
-import { usePetsStore } from "@/stores";
+import { useHomeStore } from "@/stores";
 import swipe from "./components/swipe.vue";
 
 const active = ref(0);
 
-const petsStore = usePetsStore();
-petsStore.getCategory();
+const homeStore = useHomeStore();
+homeStore.getPetCategory();
 
-const petsCategory = computed(() => petsStore.category);
+const petsCategory = computed(() => homeStore.category);
 </script>
 
-<style scoped>
-.home {
-}
-</style>
+<style scoped></style>
