@@ -47,10 +47,16 @@ const citys = computed(() => ["全市区", ...homeStore.citys]);
 const currentCity = ref(citys.value[0]);
 homeStore.currentCity = currentCity.value;
 
+// 选择城市列表事件
 const onConfirm = (value: any) => {
   currentCity.value = value;
   homeStore.currentCity = value;
   showPicker.value = false;
+
+  // 重新加载当前选择城市列表的宠物
+  homeStore.petsList.splice(0);
+  homeStore.currentPage = 1;
+  homeStore.getPetList();
 };
 </script>
 
