@@ -48,8 +48,6 @@ const props = defineProps({
     required: true,
   },
 });
-
-console.log(props.info);
 </script>
 
 <style lang="less" scoped>

@@ -1,8 +1,8 @@
 <template>
   <div class="login">
     <img class="logo" src="@/assets/images/logo.png" alt="logo" />
-    <h3>登录账户</h3>
-    <van-form @submit="onSubmit">
+    <van-form class="form" @submit="onSubmit">
+      <h3>登录账户</h3>
       <van-cell-group inset>
         <van-field
           v-model="username"
@@ -79,25 +79,28 @@ const onSubmit = () => {
 
 <style lang="less" scoped>
 .login {
-  height: 100%;
-  flex-wrap: wrap;
-  flex-direction: column;
-  justify-content: center; //子元素水平居中
-  align-items: center; //子元素垂直居中
+  height: 85%;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center; //子元素水平居中
+  align-content: center; //子元素垂直居中
+  text-align: center;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   .logo {
     width: 10rem;
     height: 10rem;
+    margin-top: 2rem;
   }
 
-  .action {
-    display: flex;
-    justify-content: space-evenly;
-    .btn-register {
-      width: 6rem;
-      margin-top: 0.25rem;
-      margin-right: 0.5rem;
+  .form {
+    .action {
+      display: flex;
+      justify-content: space-evenly;
+      .btn-register {
+        width: 6rem;
+        margin-top: 0.25rem;
+        margin-right: 0.5rem;
+      }
     }
   }
 }
