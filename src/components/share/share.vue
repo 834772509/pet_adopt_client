@@ -1,7 +1,7 @@
 <template>
   <div>
     <van-share-sheet
-      :show="show"
+      :show="props.show"
       title="立即分享给好友"
       :options="options"
       @cancel="handleCancel"

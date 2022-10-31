@@ -2,25 +2,25 @@
   <div class="pet-item">
     <van-card>
       <template #thumb>
-        <van-image fit="fill" :src="JSON.parse(info.pictures)[0]" />
+        <van-image fit="fill" :src="JSON.parse(props.info.pictures)[0]" />
       </template>
       <template #title>
-        <div class="title">{{ info.name }}</div>
+        <div class="title">{{ props.info.name }}</div>
       </template>
       <template #desc>
         <div class="tags">
           <van-tag class="tag" color="#808080" plain>
-            {{ formatAge(info.age) }}
+            {{ formatAge(props.info.age) }}
           </van-tag>
           <van-tag class="tag" color="#808080" plain>
-            {{ info.gender === 1 ? "男孩" : "女孩" }}
+            {{ props.info.gender === 1 ? "男孩" : "女孩" }}
           </van-tag>
           <van-tag class="tag" color="#808080" plain>
-            {{ info.county }}
+            {{ props.info.county }}
           </van-tag>
         </div>
         <p class="van-multi-ellipsis--l2">
-          {{ info.description || "暂无描述" }}
+          {{ props.info.description || "暂无描述" }}
         </p>
       </template>
       <template #tags>
@@ -29,22 +29,22 @@
             class="tag"
             type="success"
             plain
-            :color="info.immunity == 0 ? '#8FBC8F' : ''"
-            >{{ `${info.immunity == 0 ? "未" : "已"}免疫` }}</van-tag
+            :color="props.info.immunity == 0 ? '#8FBC8F' : ''"
+            >{{ `${props.info.immunity == 0 ? "未" : "已"}免疫` }}</van-tag
           >
           <van-tag
             class="tag"
             type="success"
-            :color="info.expelling == 0 ? '#8FBC8F' : ''"
+            :color="props.info.expelling == 0 ? '#8FBC8F' : ''"
             plain
-            >{{ `${info.expelling == 0 ? "未" : "已"}驱虫` }}</van-tag
+            >{{ `${props.info.expelling == 0 ? "未" : "已"}驱虫` }}</van-tag
           >
           <van-tag
             class="tag"
             type="success"
-            :color="info.desex == 0 ? '#8FBC8F' : ''"
+            :color="props.info.desex == 0 ? '#8FBC8F' : ''"
             plain
-            >{{ `${info.desex == 0 ? "未" : "已"}绝育` }}</van-tag
+            >{{ `${props.info.desex == 0 ? "未" : "已"}绝育` }}</van-tag
           >
         </div>
       </template>
