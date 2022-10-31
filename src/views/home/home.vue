@@ -8,7 +8,6 @@
       color="#39a9ed"
       v-model:active="currentCategory"
       offset-top="40px"
-      swipeable
       sticky
       @click-tab="onClickTab"
     >
@@ -18,28 +17,30 @@
         :title="category.name"
         :name="category.id"
       >
-        <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-          <van-list
-            v-model:loading="loading"
-            :finished="finished"
-            finished-text="没有更多了"
-            @load="onLoad"
-          >
-            <pet-item
-              v-for="pet in homeStore.petsData[currentCategory - 1]?.list || []"
-              :key="pet.id"
-              :info="pet"
-              @click="router.push('/pets/' + pet.id)"
-            />
-          </van-list>
-        </van-pull-refresh>
       </van-tab>
+
+      <!-- 宠物列表 -->
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+        <van-list
+          v-model:loading="loading"
+          :finished="finished"
+          finished-text="没有更多了"
+          @load="onLoad"
+        >
+          <pet-item
+            v-for="pet in homeStore.petsList"
+            :key="pet.id"
+            :info="pet"
+            @click="router.push('/pets/' + pet.id)"
+          />
+        </van-list>
+      </van-pull-refresh>
     </van-tabs>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { ref, computed, watch, toRef } from "vue";
 import { useRouter } from "vue-router";
 import { useHomeStore } from "@/stores";
 import swipe from "./components/swipe.vue";
@@ -57,8 +58,9 @@ const refreshing = ref(false);
 homeStore.getPetCategory();
 const petsCategory = computed(() => homeStore.category);
 
-// 获取宠物列表
-homeStore.getPetList();
+watch(toRef(homeStore, "currentPage"), (currentPage, oldPage) => {
+  finished.value = currentPage === oldPage;
+});
 
 // 上拉刷新事件
 const onRefresh = () => {
@@ -73,30 +75,21 @@ const onRefresh = () => {
 // 下拉加载更多事件
 const onLoad = () => {
   if (refreshing.value) {
-    homeStore.petsData[currentCategory.value - 1].currentPage = 0;
-    homeStore.petsData[currentCategory.value - 1].list.splice(0);
+    homeStore.currentPage = 0;
+    homeStore.petsList.splice(0);
     refreshing.value = false;
   }
-
-  const oldPage =
-    homeStore.petsData[currentCategory.value - 1]?.currentPage || 0;
 
   // 加载数据
   homeStore.getPetList().then(() => {
     loading.value = false;
-    // 判断数据是否加载完毕
-    if (
-      oldPage === homeStore.petsData[currentCategory.value - 1]?.currentPage
-    ) {
-      finished.value = true;
-    } else {
-      finished.value = false;
-    }
   });
 };
 
 // 宠物类别点击事件
 const onClickTab = () => {
+  homeStore.petsList.splice(0);
+  homeStore.currentPage = 0;
   homeStore.currentCategory = currentCategory.value;
   homeStore.getPetList();
 };

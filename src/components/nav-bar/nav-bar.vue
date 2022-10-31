@@ -54,8 +54,8 @@ const onConfirm = (value: any) => {
   showPicker.value = false;
 
   // 重新加载当前选择城市列表的宠物
-  homeStore.petsData[homeStore.currentCategory - 1].list.splice(0);
-  homeStore.petsData[homeStore.currentCategory - 1].currentPage = 1;
+  homeStore.petsList.splice(0);
+  homeStore.currentPage = 0;
   homeStore.getPetList();
 };
 </script>

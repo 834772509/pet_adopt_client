@@ -11,8 +11,10 @@ export const useHomeStore = defineStore("home", {
     currentCity: "",
     // 当前宠物类别
     currentCategory: 1,
-    // 宠物数据
-    petsData: [] as any[],
+    // 当前宠物列表数据
+    petsList: [] as any[],
+    // 当前宠物页
+    currentPage: 0,
   }),
   actions: {
     async getPetCategory() {
@@ -26,22 +28,9 @@ export const useHomeStore = defineStore("home", {
       });
     },
     async getPetList() {
-      // 初始化宠物列表数据
-      if (this.category.length == 0) {
-        return;
-      }
-      if (this.petsData.length == 0) {
-        this.petsData = this.category.map(() => ({
-          // 宠物列表数据
-          list: [],
-          // 当前宠物页
-          currentPage: 0,
-        }));
-      }
-
       // 请求宠物列表数据
       const res = await getPetsList({
-        offset: this.petsData[this.currentCategory - 1].currentPage * 10,
+        offset: this.currentPage * 10,
         size: 10,
         city: this.currentCity != "全市区" ? this.currentCity : "",
         categoryId: this.currentCategory,
@@ -49,11 +38,9 @@ export const useHomeStore = defineStore("home", {
 
       // 保存宠物列表数据
       if (res.data.list.length > 0) {
-        this.petsData[this.currentCategory - 1].list.push(...res.data.list);
-        this.petsData[this.currentCategory - 1].currentPage++;
+        this.petsList.push(...res.data.list);
+        this.currentPage++;
       }
-
-      // console.log([...this.petsData]);
     },
   },
 });
