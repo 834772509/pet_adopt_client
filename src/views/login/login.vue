@@ -50,7 +50,7 @@
 <script lang="ts" setup>
 import { ref } from "vue";
 import localCache from "@/utils/cache";
-import { useLoginStore } from "@/stores";
+import { useMainStore } from "@/stores";
 import { Dialog } from "vant";
 import "vant/es/dialog/style";
 
@@ -58,7 +58,7 @@ const isKeepPassword = ref(true);
 const username = ref("");
 const password = ref("");
 
-const loginStore = useLoginStore();
+const loginStore = useMainStore();
 const onSubmit = () => {
   if (isKeepPassword.value) {
     // 本地缓存

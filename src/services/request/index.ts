@@ -4,7 +4,7 @@ import axios, {
   type AxiosResponse,
 } from "axios";
 import type { Result } from "./types";
-import { useLoginStore } from "@/stores";
+import { useMainStore } from "@/stores";
 
 class request {
   private instance: AxiosInstance;
@@ -17,7 +17,10 @@ class request {
 
     this.instance.interceptors.request.use(
       (config) => {
-        const token = useLoginStore().token;
+        const mainStore = useMainStore();
+        mainStore.showLoading = false;
+
+        const token = mainStore.token;
         if (token) {
           config!.headers!.Authorization = `Bearer ${token}`;
         }
@@ -30,13 +33,11 @@ class request {
 
     this.instance.interceptors.response.use(
       (res) => {
-        // 拦截响应的数据
-        // if (res.data.code === 0) {
-        //   return res.data.data;
-        // }
+        useMainStore().showLoading = false;
         return res.data;
       },
       (err) => {
+        useMainStore().showLoading = false;
         return err;
       }
     );

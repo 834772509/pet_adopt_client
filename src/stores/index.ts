@@ -1,2 +1,2 @@
-export * from "./modules/login";
+export * from "./modules/main";
 export * from "./modules/home";

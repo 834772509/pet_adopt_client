@@ -12,12 +12,15 @@
 
     <!-- 底部导航栏 -->
     <nav-bar />
+
+    <loading />
   </div>
 </template>
 
 <script lang="ts" setup>
 import NavBar from "@/components/nav-bar/nav-bar.vue";
 import TabBar from "@/components/tab-bar/tab-bar.vue";
+import Loading from "@/components/loading/loading.vue";
 </script>
 
 <style lang="less" scoped>

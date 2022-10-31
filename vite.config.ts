@@ -13,6 +13,17 @@ export default defineConfig({
       resolvers: [VantResolver()],
     }),
   ],
+  css: {
+    postcss: {
+      plugins: [
+        require("autoprefixer"),
+        require("postcss-px-to-viewport")({
+          selectorBlackList: ["van"],
+          viewportWidth: 375,
+        }),
+      ],
+    },
+  },
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),

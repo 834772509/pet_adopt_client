@@ -3,10 +3,11 @@ import { accountLoginRequest, requestUserInfoById } from "@/services";
 import localCache from "@/utils/cache";
 import router from "@/router";
 
-export const useLoginStore = defineStore("login", {
+export const useMainStore = defineStore("main", {
   state: () => ({
     token: "",
     userInfo: {} as any,
+    showLoading: false,
   }),
   actions: {
     async accountLoginAction(username: string, password: string) {

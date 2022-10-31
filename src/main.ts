@@ -5,14 +5,14 @@ import router from "./router";
 import "@vant/touch-emulator";
 import "normalize.css";
 import "./assets/css/index.less";
-import { useLoginStore } from "@/stores";
+import { useMainStore } from "@/stores";
 
 const app = createApp(App);
 
-app.use(createPinia());
-const loginStore = useLoginStore();
-loginStore.loadLocalLogin();
-
 app.use(router);
+app.use(createPinia());
+
+const mainStore = useMainStore();
+mainStore.loadLocalLogin();
 
 app.mount("#app");
