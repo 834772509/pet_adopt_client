@@ -15,6 +15,13 @@ export function getPetsCategory() {
   });
 }
 
+// 获取宠物信息
+export function getPetsInfo(id: number) {
+  return request.get({
+    url: `/pets/${id}`,
+  });
+}
+
 // 获取宠物城市列表
 export function getPetsCitys() {
   return request.get({

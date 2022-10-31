@@ -29,6 +29,7 @@
               v-for="pet in homeStore.petsData[currentCategory - 1]?.list || []"
               :key="pet.id"
               :info="pet"
+              @click="router.push('/pets/' + pet.id)"
             />
           </van-list>
         </van-pull-refresh>
@@ -39,10 +40,12 @@
 
 <script lang="ts" setup>
 import { ref, computed } from "vue";
+import { useRouter } from "vue-router";
 import { useHomeStore } from "@/stores";
 import swipe from "./components/swipe.vue";
 import PetItem from "./components/pet-item.vue";
 
+const router = useRouter();
 const homeStore = useHomeStore();
 
 const currentCategory = ref(homeStore.currentCategory);

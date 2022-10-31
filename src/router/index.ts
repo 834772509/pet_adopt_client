@@ -15,6 +15,15 @@ const router = createRouter({
       component: HomeView,
     },
     {
+      path: "/pets/:id",
+      name: "detail",
+      meta: {
+        title: "宠物详情",
+        showTabBar: false,
+      },
+      component: () => import("../views/detail/detail.vue"),
+    },
+    {
       path: "/mine",
       name: "mine",
       meta: {

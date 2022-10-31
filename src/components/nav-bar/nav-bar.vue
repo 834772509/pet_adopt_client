@@ -3,13 +3,13 @@
     <van-nav-bar
       :title="route.meta.title as string || ''"
       :left-arrow="route.meta.showTabBar !== true"
-      @click-left="router.back()"
+      @click-left="route.meta.showTabBar !== true ? router.back() : ''"
       placeholder
       fixed
     >
       <!-- 选择城市列表 -->
-      <template #left>
-        <div class="city" v-if="route.meta.showCityPicker === true">
+      <template v-if="route.meta.showCityPicker === true" #left>
+        <div class="city">
           <van-field
             is-link
             readonly
@@ -54,8 +54,8 @@ const onConfirm = (value: any) => {
   showPicker.value = false;
 
   // 重新加载当前选择城市列表的宠物
-  homeStore.petsList.splice(0);
-  homeStore.currentPage = 1;
+  homeStore.petsData[homeStore.currentCategory - 1].list.splice(0);
+  homeStore.petsData[homeStore.currentCategory - 1].currentPage = 1;
   homeStore.getPetList();
 };
 </script>
