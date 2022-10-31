@@ -23,7 +23,7 @@ const props = defineProps<{
 
 <style lang="less" scoped>
 .pet-pictures {
-  height: 20rem;
+  height: 320px;
   color: #fff;
   font-size: 20px;
   line-height: 150px;

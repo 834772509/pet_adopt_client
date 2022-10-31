@@ -18,7 +18,7 @@
   .my-swipe .van-swipe-item {
     color: #39a9ed;
     width: 100%;
-    height: 10rem;
+    height: 160px;
 
     .picture {
       width: 100%;

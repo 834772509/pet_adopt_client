@@ -109,8 +109,8 @@ const onSubmit = () => {
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   .logo {
     display: block;
-    width: 10rem;
-    height: 10rem;
+    width: 160px;
+    height: 160px;
   }
 }
 </style>

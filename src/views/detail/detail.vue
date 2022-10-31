@@ -50,8 +50,8 @@ getPetsInfo(Number(id)).then((res) => {
   height: 100%;
   .content {
     position: relative;
-    border-radius: 1.5rem 1.5rem 0 0;
-    margin-top: -2rem;
+    border-radius: 24px 24px 0 0;
+    margin-top: -32px;
     width: 100%;
     height: 100%;
     background-color: #fff;

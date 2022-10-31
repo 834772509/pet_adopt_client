@@ -44,29 +44,28 @@ const props = defineProps<{ info: any }>();
 
 <style lang="less" scoped>
 .header {
-  padding: 2rem 2rem 1rem 2rem;
+  padding: 32px 32px 16px 32px;
   .title {
-    font-size: 1.5rem;
+    font-size: 24px;
     font-weight: bold;
   }
   .info {
-    margin-top: 0.5rem;
-    font-size: 0.8rem;
+    margin-top: 8px;
+    font-size: 12.8px;
     // font-weight: bold;
   }
-
   .icons {
-    margin-top: 0.5rem;
+    margin-top: 8px;
     display: flex;
     justify-content: space-between;
     .state {
-      padding: 0.1rem;
+      padding: 1.6px;
       width: 35px;
       height: 35px;
       display: flex;
       flex-direction: column;
       text-align: center;
-      font-size: 0.1rem;
+      font-size: 1.6px;
       background-color: #f6f8fc;
       white-space: nowrap;
       color: #1daee5;
@@ -76,16 +75,15 @@ const props = defineProps<{ info: any }>();
       }
     }
   }
-
   .footer {
     display: flex;
     justify-content: space-between;
-    margin-top: 2rem;
+    margin-top: 32px;
     color: #8591a9;
-    font-size: 0.8rem;
+    font-size: 12.8px;
     .left {
       .addr {
-        margin-right: 0.2rem;
+        margin-right: 3.2px;
         width: 16px;
         height: 16px;
       }

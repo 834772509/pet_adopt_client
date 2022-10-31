@@ -81,25 +81,22 @@ const onSubmit = () => {
 .login {
   height: 85%;
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center; //子元素水平居中
-  align-content: center; //子元素垂直居中
-  text-align: center;
+  flex-wrap: wrap; //子元素水平居中 align-content: center;
+  justify-content: center; //子元素垂直居中 text-align: center;
   background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   .logo {
-    width: 10rem;
-    height: 10rem;
-    margin-top: 2rem;
+    width: 160px;
+    height: 160px;
+    margin-top: 32px;
   }
-
   .form {
     .action {
       display: flex;
       justify-content: space-evenly;
       .btn-register {
-        width: 6rem;
-        margin-top: 0.25rem;
-        margin-right: 0.5rem;
+        width: 96px;
+        margin-top: 4px;
+        margin-right: 8px;
       }
     }
   }

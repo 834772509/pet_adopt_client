@@ -62,6 +62,6 @@ const onConfirm = (value: any) => {
 
 <style lang="less" scoped>
 .city {
-  width: 5rem;
+  width: 80px;
 }
 </style>

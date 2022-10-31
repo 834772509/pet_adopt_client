@@ -7,7 +7,7 @@
     <van-tabs
       color="#39a9ed"
       v-model:active="currentCategory"
-      offset-top="2.5rem"
+      offset-top="40px"
       swipeable
       sticky
       @click-tab="onClickTab"

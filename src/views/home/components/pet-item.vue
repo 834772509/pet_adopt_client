@@ -66,20 +66,17 @@ const props = defineProps({
 <style lang="less" scoped>
 .pet-item {
   width: 100%;
-  // margin-bottom: 0.5rem;
-
+  // margin-bottom: 8px;
   .title {
-    font-size: 1rem;
+    font-size: 16px;
     font-weight: bold;
   }
-
   .tags {
     display: flex;
     justify-content: left;
-    margin-top: 0.5rem;
-
+    margin-top: 8px;
     .tag {
-      margin-right: 0.5rem;
+      margin-right: 8px;
     }
   }
 }
