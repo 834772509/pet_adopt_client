@@ -5,7 +5,7 @@
 
     <!-- App内容 -->
     <router-view v-slot="{ Component }">
-      <keep-alive>
+      <keep-alive :exclude="['detail']">
         <component :is="Component" />
       </keep-alive>
     </router-view>
@@ -13,6 +13,7 @@
     <!-- 底部导航栏 -->
     <nav-bar />
 
+    <!-- 加载框 -->
     <loading />
   </div>
 </template>

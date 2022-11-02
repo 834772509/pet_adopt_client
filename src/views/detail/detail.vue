@@ -11,7 +11,7 @@
       <van-divider style="bordercolor: #8591a9" />
 
       <!-- 宠物描述 -->
-      <depict :description="petInfo.description" />
+      <depict :description="petInfo.description || '暂无描述信息'" />
     </div>
 
     <!-- 底部动作栏 -->
@@ -34,10 +34,10 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { getPetsInfo } from "@/services";
-import share from "@/components/share/share.vue";
-import pictures from "./components/pictures.vue";
-import myHeader from "./components/header.vue";
-import depict from "./components/depict.vue";
+import Share from "@/components/share/share.vue";
+import Pictures from "./components/pictures.vue";
+import MyHeader from "./components/header.vue";
+import Depict from "./components/depict.vue";
 
 const petInfo = ref({}) as any;
 const showShare = ref(false);
