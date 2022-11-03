@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="title">{{ props.info.name }}</div>
-    <div class="props.info">
+    <div class="props-info">
       {{ formatAge(props.info.age) }}
       {{ props.info.gender === 1 ? "男孩" : "女孩" }}
     </div>
@@ -29,9 +29,7 @@
         <span>{{ props.info.city + props.info.county }}</span>
       </div>
       <div class="right">
-        <span
-          >更新于 {{ formatUtcString(props.info.createAt, "YYYY-MM-DD") }}</span
-        >
+        更新于 {{ formatUtcString(props.info.createAt, "YYYY-MM-DD") }}
       </div>
     </div>
   </div>
@@ -46,22 +44,21 @@ const props = defineProps<{ info: any }>();
 
 <style lang="less" scoped>
 .header {
-  padding: 32px 32px 16px 32px;
   .title {
-    font-size: 24px;
+    font-size: 30px;
     font-weight: bold;
   }
-  .props.info {
+  .props-info {
     margin-top: 8px;
-    font-size: 12.8px;
-    // font-weight: bold;
+    font-size: 14px;
+    font-weight: bold;
   }
   .icons {
     margin-top: 8px;
     display: flex;
     justify-content: space-between;
     .state {
-      padding: 1.6px;
+      padding: 10px;
       width: 35px;
       height: 35px;
       display: flex;
@@ -82,11 +79,13 @@ const props = defineProps<{ info: any }>();
     justify-content: space-between;
     margin-top: 32px;
     color: #8591a9;
-    font-size: 12.8px;
+    font-size: 12px;
+    line-height: 16px;
+
     .left {
       .addr {
-        margin-right: 3.2px;
-        width: 16px;
+        margin-right: 4px;
+        width: 14px;
         height: 16px;
       }
     }

@@ -8,14 +8,25 @@
       <my-header :info="petInfo" />
 
       <!-- 分割线 -->
-      <van-divider style="bordercolor: #8591a9" />
+      <van-divider
+        :hairline="false"
+        :style="{ bordercolor: '#f6f8fc', padding: '0 10px' }"
+      />
 
-      <!-- 宠物描述 -->
-      <depict :description="petInfo.description || '暂无描述信息'" />
+      <div class="title">TA的故事</div>
+      <p class="description">{{ petInfo.description || "暂无描述信息" }}</p>
+
+      <div class="title">领养要求</div>
+      <p class="adoptRequirement">
+        {{ petInfo.adoptRequirement || "暂无领养要求" }}
+      </p>
+
+      <div class="title">送养人信息</div>
+      <place :info="petInfo" />
     </div>
 
     <!-- 底部动作栏 -->
-    <van-action-bar placeholder>
+    <van-action-bar class="action-bar" placeholder>
       <van-action-bar-icon icon="star-o" text="收藏" />
       <van-action-bar-icon
         icon="share-o"
@@ -37,7 +48,7 @@ import { getPetsInfo } from "@/services";
 import Share from "@/components/share/share.vue";
 import Pictures from "./components/pictures.vue";
 import MyHeader from "./components/header.vue";
-import Depict from "./components/depict.vue";
+import Place from "./components/place.vue";
 
 const petInfo = ref({}) as any;
 const showShare = ref(false);
@@ -55,12 +66,19 @@ getPetsInfo(Number(id)).then((res) => {
   width: 100%;
   height: 100%;
   .content {
+    padding: 24px 32px 32px 32px;
     position: relative;
     border-radius: 24px 24px 0 0;
     margin-top: -32px;
-    width: 100%;
-    height: 100%;
     background-color: #fff;
+    .title {
+      font-size: 21px;
+      font-weight: bold;
+    }
+    .description {
+      color: #666;
+      line-height: 25px;
+    }
   }
 }
 </style>

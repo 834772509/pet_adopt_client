@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="nav-bar">
     <van-nav-bar
       :title="route.meta.title as string || ''"
       :left-arrow="route.meta.showTabBar !== true"
@@ -61,7 +61,9 @@ const onConfirm = (value: any) => {
 </script>
 
 <style lang="less" scoped>
-.city {
-  width: 80px;
+.nav-bar {
+  .city {
+    width: 80px;
+  }
 }
 </style>
