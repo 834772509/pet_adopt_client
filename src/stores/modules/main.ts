@@ -21,7 +21,7 @@ export const useMainStore = defineStore("main", {
       // 2.请求用户信息
       const userInfoResult = await requestUserInfoById(id);
       this.userInfo = userInfoResult.data;
-      localCache.setCache("userInfo", userInfoResult);
+      localCache.setCache("userInfo", userInfoResult.data);
 
       // 4. 跳转到首页
       router.push("/");

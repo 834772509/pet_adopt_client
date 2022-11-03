@@ -28,3 +28,11 @@ export function getPetsCitys() {
     url: "/pets/city/count",
   });
 }
+
+// 申请领养宠物
+export function applyAdoptPet(adopt: any) {
+  return request.post({
+    url: "/adopt",
+    data: adopt,
+  });
+}

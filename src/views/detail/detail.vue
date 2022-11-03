@@ -33,7 +33,11 @@
         text="分享"
         @click="showShare = true"
       />
-      <van-action-bar-button type="primary" text="申请领养" />
+      <van-action-bar-button
+        type="primary"
+        text="申请领养"
+        :url="'/pets/' + id + '/adopt'"
+      />
     </van-action-bar>
 
     <!-- 分享面板 -->
