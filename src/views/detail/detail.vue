@@ -17,8 +17,13 @@
       <p class="description">{{ petInfo.description || "暂无描述信息" }}</p>
 
       <div class="title">领养要求</div>
-      <p class="adoptRequirement">
+      <p class="descriptiont">
         {{ petInfo.adoptRequirement || "暂无领养要求" }}
+      </p>
+
+      <div class="title">弃养原因</div>
+      <p class="description">
+        {{ petInfo.sentReason || "暂无弃养原因" }}
       </p>
 
       <div class="title">送养人信息</div>
@@ -34,9 +39,22 @@
         @click="showShare = true"
       />
       <van-action-bar-button
-        type="primary"
-        text="申请领养"
+        :type="
+          petInfo.status === -1
+            ? 'primary'
+            : petInfo.status === 0
+            ? 'warning'
+            : 'success'
+        "
+        :text="
+          petInfo.status === -1
+            ? '申请领养'
+            : petInfo.status === 0
+            ? '正在审核'
+            : '已被领养'
+        "
         :url="'/pets/' + id + '/adopt'"
+        :disabled="petInfo.status !== -1"
       />
     </van-action-bar>
 
