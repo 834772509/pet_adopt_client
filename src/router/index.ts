@@ -1,16 +1,22 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/home/home.vue";
+import localCache from "@/utils/cache";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
+      redirect: "/home",
+    },
+    {
+      path: "/home",
       name: "home",
       meta: {
         title: "拾宠 - 宠物领养平台",
         showCityPicker: true,
         showTabBar: true,
+        needLogin: false,
       },
       component: HomeView,
     },
@@ -20,6 +26,7 @@ const router = createRouter({
       meta: {
         title: "宠物详情",
         showTabBar: false,
+        needLogin: false,
       },
       component: () => import("../views/detail/detail.vue"),
     },
@@ -56,6 +63,7 @@ const router = createRouter({
       meta: {
         title: "注册账户",
         showTabBar: false,
+        needLogin: false,
       },
       component: () => import("../views/register/register.vue"),
     },
@@ -65,6 +73,7 @@ const router = createRouter({
       meta: {
         title: "登录账户",
         showTabBar: true,
+        needLogin: false,
       },
       component: () => import("../views/login/login.vue"),
     },
@@ -77,6 +86,16 @@ const router = createRouter({
       component: () => import("@/views/not-found/not-found.vue"),
     },
   ],
+});
+
+// 导航守卫
+router.beforeEach((to) => {
+  if (to.meta.needLogin !== false) {
+    const token = localCache.getCache("token");
+    if (!token) {
+      return "/login";
+    }
+  }
 });
 
 export default router;
