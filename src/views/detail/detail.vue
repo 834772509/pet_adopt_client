@@ -17,7 +17,7 @@
       <p class="description">{{ petInfo.description || "暂无描述信息" }}</p>
 
       <div class="title">领养要求</div>
-      <p class="descriptiont">
+      <p class="description">
         {{ petInfo.adoptRequirement || "暂无领养要求" }}
       </p>
 

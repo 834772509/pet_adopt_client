@@ -30,6 +30,7 @@ export const useHomeStore = defineStore("home", {
     async getPetList() {
       // 请求宠物列表数据
       const res = await getPetsList({
+        status: -1,
         offset: this.currentPage * 10,
         size: 10,
         city: this.currentCity != "全市区" ? this.currentCity : "",

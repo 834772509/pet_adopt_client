@@ -7,6 +7,9 @@
       <van-swipe-item>
         <img class="picture" src="@/assets/images/banner/banner2.webp" />
       </van-swipe-item>
+      <van-swipe-item>
+        <img class="picture" src="@/assets/images/banner/banner3.jpg" />
+      </van-swipe-item>
     </van-swipe>
   </div>
 </template>

@@ -18,7 +18,7 @@ export default defineConfig({
       plugins: [
         require("autoprefixer"),
         require("postcss-px-to-viewport")({
-          selectorBlackList: ["van"],
+          selectorBlackList: [".van"],
           viewportWidth: 375,
         }),
       ],
