@@ -2,9 +2,9 @@
   <div class="pet-pictures">
     <van-swipe class="pet-pictures" :autoplay="3000" lazy-render>
       <van-swipe-item
-        v-for="image in props.list"
+        v-for="(image, index) in props.list"
         :key="image"
-        @click="ImagePreview(props.list)"
+        @click="ImagePreview({ images: props.list, startPosition: index })"
       >
         <img :src="image" />
       </van-swipe-item>

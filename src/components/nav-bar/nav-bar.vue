@@ -1,14 +1,14 @@
 <template>
   <div class="nav-bar">
     <van-nav-bar
-      :title="route.meta.title as string || ''"
-      :left-arrow="route.meta.showTabBar !== true"
-      @click-left="route.meta.showTabBar !== true ? router.back() : ''"
+      :title="$route.meta.title as string || ''"
+      :left-arrow="$route.meta.showTabBar !== true"
+      @click-left="$route.meta.showTabBar !== true ? $router.back() : ''"
       placeholder
       fixed
     >
       <!-- 选择城市列表 -->
-      <template v-if="route.meta.showCityPicker === true" #left>
+      <template v-if="$route.meta.showCityPicker === true" #left>
         <div class="city">
           <van-field
             is-link
@@ -32,11 +32,7 @@
 
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import { useRoute, useRouter } from "vue-router";
 import { useHomeStore } from "@/stores";
-
-const route = useRoute();
-const router = useRouter();
 
 // 处理宠物城市信息
 const homeStore = useHomeStore();

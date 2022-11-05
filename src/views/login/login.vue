@@ -2,7 +2,9 @@
   <div class="login">
     <img class="logo" src="@/assets/images/logo.png" alt="logo" />
     <van-form class="form" @submit="onSubmit">
-      <h3>登录账户</h3>
+      <div class="title">
+        <h3>登录账户</h3>
+      </div>
       <van-cell-group inset>
         <van-field
           v-model="username"
@@ -90,6 +92,10 @@ const onSubmit = () => {
     margin-top: 32px;
   }
   .form {
+    .title {
+      text-align: center;
+      font-size: 20px;
+    }
     .action {
       display: flex;
       justify-content: space-evenly;

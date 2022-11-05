@@ -1,6 +1,6 @@
 <template>
   <div class="adopt">
-    <p class="tips">请填写正确信息，领养从真诚开始</p>
+    <div class="tips">请填写正确信息，领养从真诚开始</div>
 
     <van-form @submit="onSubmit">
       <van-field
@@ -170,10 +170,11 @@ const onSubmit = (values: any) => {
 <style lang="less" scoped>
 .adopt {
   background-color: #fff;
-  margin-top: var(--van-nav-bar-height);
   height: 100%;
 
   .tips {
+    color: #666;
+    padding: 10px;
     font-size: 14px;
     text-align: center;
   }

@@ -1,7 +1,7 @@
 <template>
   <div class="app">
     <!-- 顶部导航栏 -->
-    <tab-bar />
+    <nav-bar />
 
     <!-- App内容 -->
     <router-view v-slot="{ Component }">
@@ -11,7 +11,7 @@
     </router-view>
 
     <!-- 底部导航栏 -->
-    <nav-bar />
+    <tab-bar />
 
     <!-- 加载框 -->
     <loading />
