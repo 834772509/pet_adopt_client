@@ -10,15 +10,6 @@ const router = createRouter({
       redirect: "/home",
     },
     {
-      path: "/pc",
-      name: "pc",
-      meta: {
-        showTabBar: false,
-        needLogin: false,
-      },
-      component: () => import("../views/pc/pc.vue"),
-    },
-    {
       path: "/home",
       name: "home",
       meta: {
