@@ -34,8 +34,8 @@
     />
 
     <van-grid :column-num="2">
-      <van-grid-item icon="label-o" text="平台规则" />
-      <van-grid-item icon="apps-o" text="关注服务号" />
+      <van-grid-item icon="label-o" text="领养协议" />
+      <van-grid-item icon="apps-o" text="联系我们" />
     </van-grid>
 
     <div class="footer">

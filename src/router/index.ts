@@ -10,6 +10,15 @@ const router = createRouter({
       redirect: "/home",
     },
     {
+      path: "/pc",
+      name: "pc",
+      meta: {
+        showTabBar: false,
+        needLogin: false,
+      },
+      component: () => import("../views/pc/pc.vue"),
+    },
+    {
       path: "/home",
       name: "home",
       meta: {
@@ -47,6 +56,24 @@ const router = createRouter({
         showTabBar: true,
       },
       component: () => import("../views/mine/mine.vue"),
+    },
+    {
+      path: "/mine/agreement",
+      name: "agreement",
+      meta: {
+        title: "领养协议",
+        showTabBar: false,
+      },
+      component: () => import("../views/mine/views/agreement/agreement.vue"),
+    },
+    {
+      path: "/mine/contact",
+      name: "contact",
+      meta: {
+        title: "联系我们",
+        showTabBar: false,
+      },
+      component: () => import("../views/mine/views/contact/contact.vue"),
     },
     {
       path: "/publish",
