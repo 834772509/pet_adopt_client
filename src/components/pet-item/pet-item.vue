@@ -1,6 +1,6 @@
 <template>
   <div class="pet-item">
-    <van-card :thumb="JSON.parse(props.info.pictures)[0]">
+    <van-card :thumb="JSON.parse(props.info.pictures)[0] || 'null'">
       <!-- 宠物名称 -->
       <template #title>
         <div class="title">{{ props.info.name }}</div>

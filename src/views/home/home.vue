@@ -44,7 +44,7 @@ import { ref, computed, watch, toRef } from "vue";
 import { useRouter } from "vue-router";
 import { useHomeStore } from "@/stores";
 import swipe from "./components/swipe.vue";
-import PetItem from "./components/pet-item.vue";
+import PetItem from "../../components/pet-item/pet-item.vue";
 
 const router = useRouter();
 const homeStore = useHomeStore();
