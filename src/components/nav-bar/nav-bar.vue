@@ -9,57 +9,23 @@
     >
       <!-- 选择城市列表 -->
       <template v-if="$route.meta.showCityPicker === true" #left>
-        <div class="city">
-          <van-field
-            is-link
-            readonly
-            placeholder="城市"
-            v-model="currentCity"
-            @click="showPicker = true"
-          />
-          <van-popup v-model:show="showPicker" round position="bottom">
-            <van-picker
-              :columns="citys"
-              @cancel="showPicker = false"
-              @confirm="onConfirm"
-            />
-          </van-popup>
-        </div>
+        <city-picker />
+      </template>
+
+      <!-- 选择筛选 -->
+      <template v-if="$route.meta.showCityPicker === true" #right>
+        <filter-picker />
       </template>
     </van-nav-bar>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
-import { useHomeStore } from "@/stores";
-
-// 处理宠物城市信息
-const homeStore = useHomeStore();
-homeStore.getPetCitys();
-
-const showPicker = ref(false);
-const citys = computed(() => ["全市区", ...homeStore.citys]);
-const currentCity = ref(citys.value[0]);
-homeStore.currentCity = currentCity.value;
-
-// 选择城市列表事件
-const onConfirm = (value: any) => {
-  currentCity.value = value;
-  homeStore.currentCity = value;
-  showPicker.value = false;
-
-  // 重新加载当前选择城市列表的宠物
-  homeStore.petsList.splice(0);
-  homeStore.currentPage = 0;
-  homeStore.getPetList();
-};
+import CityPicker from "./components/city-picker.vue";
+import FilterPicker from "./components/filter-picker.vue";
 </script>
 
 <style lang="less" scoped>
 .nav-bar {
-  .city {
-    width: 80px;
-  }
 }
 </style>
