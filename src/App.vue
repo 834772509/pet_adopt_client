@@ -5,7 +5,7 @@
 
     <!-- App内容 -->
     <router-view v-slot="{ Component }">
-      <keep-alive :exclude="['detail']">
+      <keep-alive :exclude="['detail', 'stars']">
         <component :is="Component" />
       </keep-alive>
     </router-view>

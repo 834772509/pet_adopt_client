@@ -31,6 +31,7 @@
       class="promotion-banner"
       src="@/assets/images/promotion_banner.png"
       alt=""
+      @click="showShare = true"
     />
 
     <van-grid :column-num="2">
@@ -43,11 +44,18 @@
       <p>工作时间：周一至周五 09:00-17:00</p>
       <p>—— 领养从真诚开始 ——</p>
     </div>
+
+    <!-- 分享面板 -->
+    <share v-model:show="showShare" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { ref } from "vue";
 import { useMainStore } from "@/stores";
+import share from "@/components/share/share.vue";
+
+const showShare = ref(false);
 
 const mainStore = useMainStore();
 const { userInfo } = mainStore;

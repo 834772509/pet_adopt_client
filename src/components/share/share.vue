@@ -6,6 +6,7 @@
       :options="options"
       @cancel="handleCancel"
       @select="handleSelect"
+      close-on-click-overlay
     />
   </div>
 </template>
