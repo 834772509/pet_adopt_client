@@ -21,7 +21,7 @@
         <img src="@/assets/images/my_icon_adopt.png" alt="" />
         <span>领养</span>
       </router-link>
-      <router-link class="my-item" to="">
+      <router-link class="my-item" to="/mine/stars">
         <img src="@/assets/images/my_icon_favor.png" alt="" />
         <span>收藏</span>
       </router-link>
@@ -34,8 +34,8 @@
     />
 
     <van-grid :column-num="2">
-      <van-grid-item icon="label-o" text="领养协议" />
-      <van-grid-item icon="apps-o" text="联系我们" />
+      <van-grid-item icon="label-o" text="领养协议" to="/mine/agreement" />
+      <van-grid-item icon="apps-o" text="联系我们" to="/mine/contact" />
     </van-grid>
 
     <div class="footer">

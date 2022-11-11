@@ -27,6 +27,7 @@ const router = createRouter({
         title: "宠物详情",
         showTabBar: false,
         needLogin: false,
+        keepAlive: false,
       },
       component: () => import("../views/detail/detail.vue"),
     },
@@ -47,6 +48,16 @@ const router = createRouter({
         showTabBar: true,
       },
       component: () => import("../views/mine/mine.vue"),
+    },
+    {
+      path: "/mine/stars",
+      name: "stars",
+      meta: {
+        title: "我的收藏",
+        showTabBar: false,
+        keepAlive: false,
+      },
+      component: () => import("../views/mine/views/stars/stars.vue"),
     },
     {
       path: "/mine/agreement",
