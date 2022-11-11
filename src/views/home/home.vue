@@ -20,18 +20,22 @@
       </van-tab>
 
       <!-- 宠物列表 -->
+      <van-empty
+        v-if="homeStore.petsList.length === 0"
+        description="暂无宠物"
+      />
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
         <van-list
           v-model:loading="loading"
           :finished="finished"
-          finished-text="没有更多了"
+          :finished-text="homeStore.petsList.length === 0 ? '' : '没有更多了'"
           @load="onLoad"
         >
           <pet-item
             v-for="pet in homeStore.petsList"
             :key="pet.id"
             :info="pet"
-            @click="router.push('/pets/' + pet.id)"
+            @click="$router.push('/pets/' + pet.id)"
           />
         </van-list>
       </van-pull-refresh>
@@ -41,12 +45,10 @@
 
 <script lang="ts" setup>
 import { ref, computed, watch, toRef } from "vue";
-import { useRouter } from "vue-router";
 import { useHomeStore } from "@/stores";
 import swipe from "./components/swipe.vue";
 import PetItem from "../../components/pet-item/pet-item.vue";
 
-const router = useRouter();
 const homeStore = useHomeStore();
 
 const currentCategory = ref(homeStore.currentCategory);
