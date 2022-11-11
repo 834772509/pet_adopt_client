@@ -31,6 +31,7 @@ const props = defineProps<{
   }
 
   .content {
+    color: #000;
     white-space: pre-wrap;
     word-wrap: break-word;
   }
