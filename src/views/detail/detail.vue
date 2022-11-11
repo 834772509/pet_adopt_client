@@ -32,7 +32,12 @@
 
     <!-- 底部动作栏 -->
     <van-action-bar class="action-bar" placeholder>
-      <van-action-bar-icon icon="star-o" text="收藏" />
+      <van-action-bar-icon
+        :icon="isStarPet ? 'star' : 'star-o'"
+        color="#1989fa"
+        text="收藏"
+        @click="handleStar"
+      />
       <van-action-bar-icon
         icon="share-o"
         text="分享"
@@ -66,21 +71,51 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useRoute } from "vue-router";
-import { getPetsInfo } from "@/services";
+import {
+  getPetsInfo,
+  getStarsPetInfo,
+  starsPet,
+  cancelStarsPet,
+} from "@/services";
 import Share from "@/components/share/share.vue";
 import Pictures from "./components/pictures.vue";
 import MyHeader from "./components/header.vue";
 import Place from "./components/place.vue";
+import { Notify } from "vant";
+import "vant/es/notify/style";
 
 const petInfo = ref({}) as any;
 const showShare = ref(false);
+const isStarPet = ref(false);
 
 const route = useRoute();
-const { id } = route.params;
+const id = route.params.id as unknown as number;
 
-getPetsInfo(Number(id)).then((res) => {
+// 获取宠物信息
+getPetsInfo(id).then((res) => {
   petInfo.value = res.data;
 });
+
+// 获取收藏状态
+getStarsPetInfo(id).then((res) => {
+  isStarPet.value = res.data !== undefined;
+});
+
+const handleStar = () => {
+  if (isStarPet.value) {
+    // 取消收藏宠物
+    cancelStarsPet(id).then(() => {
+      isStarPet.value = false;
+      Notify({ type: "primary", message: "已取消收藏", duration: 2000 });
+    });
+  } else {
+    // 收藏宠物
+    starsPet(id).then(() => {
+      Notify({ type: "success", message: "收藏成功", duration: 2000 });
+      isStarPet.value = true;
+    });
+  }
+};
 </script>
 
 <style lang="less" scoped>
