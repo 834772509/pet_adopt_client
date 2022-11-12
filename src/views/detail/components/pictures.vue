@@ -6,7 +6,7 @@
         :key="image"
         @click="ImagePreview({ images: props.list, startPosition: index })"
       >
-        <van-image :src="image" />
+        <van-image :src="image" width="100%" height="100%" fit="cover" />
       </van-swipe-item>
 
       <van-swipe-item v-if="props.list.length === 0">

@@ -1,5 +1,6 @@
 <template>
   <div class="mine">
+    <!-- 用户信息 -->
     <div class="user-banner">
       <van-image
         width="4rem"
@@ -12,21 +13,26 @@
       </div>
     </div>
 
+    <!-- 功能导航 -->
     <div class="container">
       <router-link class="my-item" to="">
-        <img src="@/assets/images/my_icon_place.png" alt="" />
+        <!-- <img src="@/assets/images/my_icon_place.png" alt="" /> -->
+        <van-icon color="#1989fa" name="bookmark" size="35" />
         <span>送养</span>
       </router-link>
       <router-link class="my-item" to="">
-        <img src="@/assets/images/my_icon_adopt.png" alt="" />
+        <!-- <img src="@/assets/images/my_icon_adopt.png" alt="" /> -->
+        <van-icon color="#1989fa" name="medal" size="35" />
         <span>领养</span>
       </router-link>
       <router-link class="my-item" to="/mine/stars">
-        <img src="@/assets/images/my_icon_favor.png" alt="" />
+        <!-- <img src="@/assets/images/my_icon_favor.png" alt="" /> -->
+        <van-icon name="star" color="#1989fa" size="35" />
         <span>收藏</span>
       </router-link>
     </div>
 
+    <!-- 分享面板图片 -->
     <img
       class="promotion-banner"
       src="@/assets/images/promotion_banner.png"
@@ -34,11 +40,23 @@
       @click="showShare = true"
     />
 
-    <van-grid :column-num="2">
-      <van-grid-item icon="label-o" text="领养协议" to="/mine/agreement" />
-      <van-grid-item icon="apps-o" text="联系我们" to="/mine/contact" />
+    <!-- 领养协议、关于我们 -->
+    <van-grid :column-num="2" icon-size="35">
+      <van-grid-item
+        icon="label"
+        icon-color="#1989fa"
+        text="领养协议"
+        to="/mine/agreement"
+      />
+      <van-grid-item
+        icon="comment-circle"
+        icon-color="#1989fa"
+        text="联系我们"
+        to="/mine/contact"
+      />
     </van-grid>
 
+    <!-- 底部关于信息 -->
     <div class="footer">
       <p>客服电话: xxx-xxxx-xxxx</p>
       <p>工作时间：周一至周五 09:00-17:00</p>
@@ -86,7 +104,7 @@ const { userInfo } = mainStore;
     margin-bottom: 15px;
 
     .my-item {
-      display: block;
+      display: flex;
       flex-direction: column;
       width: 80px;
       border-radius: 5px;
@@ -98,11 +116,12 @@ const { userInfo } = mainStore;
       color: #666;
       text-align: center;
 
-      img {
-        display: block;
-        width: 50px;
-        height: 50px;
-        margin: 0 auto;
+      i {
+        margin-top: 8px;
+      }
+
+      span {
+        margin-top: 8px;
       }
     }
   }

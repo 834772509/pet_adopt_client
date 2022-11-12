@@ -81,8 +81,8 @@ import Share from "@/components/share/share.vue";
 import Pictures from "./components/pictures.vue";
 import MyHeader from "./components/header.vue";
 import Place from "./components/place.vue";
-import { Notify } from "vant";
-import "vant/es/notify/style";
+import { Toast } from "vant";
+import "vant/es/toast/style";
 
 const petInfo = ref({}) as any;
 const showShare = ref(false);
@@ -106,12 +106,12 @@ const handleStar = () => {
     // 取消收藏宠物
     cancelStarsPet(id).then(() => {
       isStarPet.value = false;
-      Notify({ type: "primary", message: "已取消收藏", duration: 2000 });
+      Toast("已取消收藏");
     });
   } else {
     // 收藏宠物
     starsPet(id).then(() => {
-      Notify({ type: "success", message: "收藏成功", duration: 2000 });
+      Toast.success("收藏成功");
       isStarPet.value = true;
     });
   }
