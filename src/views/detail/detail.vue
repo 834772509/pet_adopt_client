@@ -70,13 +70,14 @@
 
 <script setup lang="ts">
 import { ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import {
   getPetsInfo,
   getStarsPetInfo,
   starsPet,
   cancelStarsPet,
 } from "@/services";
+import { useMainStore } from "@/stores";
 import Share from "@/components/share/share.vue";
 import Pictures from "./components/pictures.vue";
 import MyHeader from "./components/header.vue";
@@ -89,7 +90,11 @@ const showShare = ref(false);
 const isStarPet = ref(false);
 
 const route = useRoute();
+const router = useRouter();
+
 const id = route.params.id as unknown as number;
+
+const mainStore = useMainStore();
 
 // 获取宠物信息
 getPetsInfo(id).then((res) => {
@@ -97,11 +102,18 @@ getPetsInfo(id).then((res) => {
 });
 
 // 获取收藏状态
-getStarsPetInfo(id).then((res) => {
-  isStarPet.value = res.data !== undefined;
-});
+if (mainStore.token) {
+  getStarsPetInfo(id).then((res) => {
+    isStarPet.value = res.data !== undefined;
+  });
+}
 
 const handleStar = () => {
+  if (!mainStore.token) {
+    router.push("/login");
+    return;
+  }
+
   if (isStarPet.value) {
     // 取消收藏宠物
     cancelStarsPet(id).then(() => {

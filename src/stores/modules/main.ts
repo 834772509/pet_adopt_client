@@ -27,14 +27,16 @@ export const useMainStore = defineStore("main", {
       this.userInfo = userInfoResult.data;
       localCache.setCache("userInfo", userInfoResult.data);
 
-      // 4. 跳转到首页
-      router.push("/");
+      // 4. 返回上一级路由
+      // router.push("/");
+      router.back();
     },
     loadLocalLogin() {
       const expiresAt = localCache.getCache("expiresAt");
       if (expiresAt && new Date().getTime() > new Date(expiresAt).getTime()) {
         // token 已过期，清除本地 token
         localCache.clearCacke();
+        return;
       }
 
       const token = localCache.getCache("token");
