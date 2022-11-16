@@ -3,6 +3,31 @@
     <!-- 轮播图 -->
     <swipe />
 
+    <!-- 功能模块 -->
+    <van-grid :column-num="3">
+      <van-grid-item
+        icon-color="#1989fa"
+        icon-size="35"
+        icon="column"
+        text="失信名单"
+        to=""
+      />
+      <van-grid-item
+        icon-color="#1989fa"
+        icon-size="35"
+        icon="question"
+        text="帮助中心"
+        to=""
+      />
+      <van-grid-item
+        icon-color="#1989fa"
+        icon-size="35"
+        icon="thumb-circle"
+        text="支持我们"
+        to=""
+      />
+    </van-grid>
+
     <!-- 宠物类别选项卡 -->
     <van-tabs
       color="#39a9ed"

@@ -18,7 +18,7 @@ class request {
     this.instance.interceptors.request.use(
       (config) => {
         const mainStore = useMainStore();
-        mainStore.showLoading = false;
+        mainStore.showLoading = true;
 
         const token = mainStore.token;
         if (token) {

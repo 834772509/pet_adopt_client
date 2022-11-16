@@ -15,7 +15,7 @@ export function getPetsCategory() {
   });
 }
 
-// 获取宠物信息
+// 获取宠物信息-通过id
 export function getPetsInfo(id: number) {
   return request.get({
     url: `/pets/${id}`,
@@ -29,39 +29,18 @@ export function getPetsCitys() {
   });
 }
 
+// 提交送养宠物信息
+export function publishPet(petInfo: any) {
+  return request.post({
+    url: "/pets",
+    data: petInfo,
+  });
+}
+
 // 申请领养宠物
 export function applyAdoptPet(adopt: any) {
   return request.post({
     url: "/adopt",
     data: adopt,
-  });
-}
-
-// 收藏宠物
-export function starsPet(petId: number) {
-  return request.post({
-    url: `/users/stars/${petId}`,
-  });
-}
-
-// 获取宠物收藏信息
-export function getStarsPetInfo(petId: number) {
-  return request.get({
-    url: `/users/stars/${petId}`,
-  });
-}
-
-// 获取收藏宠物列表
-export function getStarsPetList(query?: any) {
-  return request.post({
-    url: "/users/stars/list",
-    data: query,
-  });
-}
-
-// 取消收藏宠物
-export function cancelStarsPet(petId: number) {
-  return request.delete({
-    url: `/users/stars/${petId}`,
   });
 }

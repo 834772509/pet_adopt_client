@@ -1,7 +1,7 @@
 <template>
   <div class="detail">
     <!-- 宠物图片 -->
-    <pictures :list="JSON.parse(petInfo.pictures || '[]')" />
+    <pictures :list="petInfo.pictures || []" />
 
     <div class="content">
       <!-- 头部信息栏 -->
@@ -98,6 +98,7 @@ const mainStore = useMainStore();
 
 // 获取宠物信息
 getPetsInfo(id).then((res) => {
+  res.data.pictures = JSON.parse(res.data.pictures || "[]");
   petInfo.value = res.data;
 });
 

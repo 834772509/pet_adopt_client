@@ -1,25 +1,30 @@
 import request from "../request";
 
 // 收藏宠物
-export function starPet(userId: number, petId: number) {
+export function starsPet(petId: number) {
   return request.post({
-    url: `/users/stars/${userId}`,
-    data: { petId },
+    url: `/users/stars/${petId}`,
   });
 }
 
-// 收藏列表
-export function getStarList(userId: number, query?: any) {
+// 获取收藏宠物列表
+export function getStarsPetList(query?: any) {
   return request.post({
-    url: `/users/stars/list/${userId}`,
+    url: "/users/stars/list",
     data: query,
   });
 }
 
-// 取消收藏
-export function cancelStarPet(userId: number, petId: number) {
+// 获取宠物收藏信息
+export function getStarsPetInfo(petId: number) {
+  return request.get({
+    url: `/users/stars/${petId}`,
+  });
+}
+
+// 取消收藏宠物
+export function cancelStarsPet(petId: number) {
   return request.delete({
-    url: `/users/stars/${userId}`,
-    data: { petId },
+    url: `/users/stars/${petId}`,
   });
 }
