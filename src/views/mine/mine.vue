@@ -20,7 +20,7 @@
         <van-icon color="#1989fa" name="bookmark" size="35" />
         <span>送养</span>
       </router-link>
-      <router-link class="my-item" to="">
+      <router-link class="my-item" to="/mine/adopt">
         <!-- <img src="@/assets/images/my_icon_adopt.png" alt="" /> -->
         <van-icon color="#1989fa" name="medal" size="35" />
         <span>领养</span>
