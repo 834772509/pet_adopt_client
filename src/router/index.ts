@@ -78,6 +78,15 @@ const router = createRouter({
       component: () => import("../views/mine/views/contact/contact.vue"),
     },
     {
+      path: "/support",
+      name: "support",
+      meta: {
+        title: "支持我们",
+        showTabBar: false,
+      },
+      component: () => import("../views/support/support.vue"),
+    },
+    {
       path: "/publish",
       name: "publish",
       meta: {
