@@ -96,6 +96,24 @@ const router = createRouter({
       component: () => import("../views/publish/publish.vue"),
     },
     {
+      path: "/blacklist",
+      name: "blacklist",
+      meta: {
+        title: "失信黑名单",
+        showTabBar: false,
+      },
+      component: () => import("../views/blacklist/blacklist.vue"),
+    },
+    {
+      path: "/blackdetail/:id",
+      name: "blackdetail",
+      meta: {
+        title: "失信人信息",
+        showTabBar: false,
+      },
+      component: () => import("../views/black-detail/black-detail.vue"),
+    },
+    {
       path: "/register",
       name: "register",
       meta: {
