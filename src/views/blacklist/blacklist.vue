@@ -1,29 +1,39 @@
 <template>
   <div class="blacklist">
-    <van-empty v-if="blacklist.length === 0" description="暂无失信人名单" />
-    <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
-      <van-list
-        v-model:loading="loading"
-        :finished="finished"
-        :finished-text="blacklist.length === 0 ? '' : '没有更多了'"
-        @load="onLoad"
-      >
-        <van-swipe-cell v-for="item in blacklist" :key="item.id">
-          <blacklist-item
-            :info="item"
-            @click="$router.push('/blackdetail/' + item.id)"
-          />
-          <!-- <hr /> -->
-          <van-divider
-            :style="{
-              color: '#1989fa',
-              borderColor: '#1989fa',
-              margin: '0',
-            }"
-          />
-        </van-swipe-cell>
-      </van-list>
-    </van-pull-refresh>
+    <van-tabs
+      color="#39a9ed"
+      v-model:active="blacklistType"
+      @click-tab="onClickTab"
+      offset-top="40px"
+      sticky
+    >
+      <van-tab title="失信领养人"></van-tab>
+      <van-tab title="失信送养人"></van-tab>
+      <van-empty v-if="blacklist.length === 0" description="暂无失信人名单" />
+
+      <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
+        <van-list
+          v-model:loading="loading"
+          :finished="finished"
+          :finished-text="blacklist.length === 0 ? '' : '没有更多了'"
+          @load="onLoad"
+        >
+          <van-swipe-cell v-for="item in blacklist" :key="item.id">
+            <blacklist-item
+              :info="item"
+              @click="$router.push('/blackdetail/' + item.id)"
+            />
+            <van-divider
+              :style="{
+                color: '#1989fa',
+                borderColor: '#1989fa',
+                margin: '0',
+              }"
+            />
+          </van-swipe-cell>
+        </van-list>
+      </van-pull-refresh>
+    </van-tabs>
   </div>
 </template>
 
@@ -36,6 +46,12 @@ const blacklist = ref([] as any[]);
 const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
+
+const blacklistType = ref(0);
+const onClickTab = () => {
+  refreshing.value = true;
+  onRefresh();
+};
 
 let currentPage = 0;
 
@@ -59,6 +75,7 @@ const onLoad = () => {
 
   // 加载数据
   getBlackList({
+    type: blacklistType.value,
     offset: currentPage * 10,
     size: 10,
   }).then((res) => {
