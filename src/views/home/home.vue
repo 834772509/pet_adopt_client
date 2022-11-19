@@ -10,23 +10,25 @@
         icon-size="35"
         icon="column"
         text="失信名单"
-        to=""
+        to="/blacklist"
       />
       <van-grid-item
         icon-color="#1989fa"
         icon-size="35"
         icon="question"
-        text="帮助中心"
-        to=""
+        text="智能识宠"
+        @click="handleIdentifyPet"
       />
       <van-grid-item
         icon-color="#1989fa"
         icon-size="35"
         icon="thumb-circle"
         text="支持我们"
-        to=""
+        to="/support"
       />
     </van-grid>
+
+    <recognition-picker ref="recognitionRef" />
 
     <!-- 宠物类别选项卡 -->
     <van-tabs
@@ -73,6 +75,7 @@ import { ref, computed, watch, toRef } from "vue";
 import { useHomeStore } from "@/stores";
 import swipe from "./components/swipe.vue";
 import PetItem from "../../components/pet-item/pet-item.vue";
+import recognitionPicker from "./components/recognition-picker.vue";
 
 const homeStore = useHomeStore();
 
@@ -80,6 +83,8 @@ const currentCategory = ref(homeStore.currentCategory);
 const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
+
+const recognitionRef = ref();
 
 // 处理宠物类别数据
 homeStore.getPetCategory();
@@ -119,6 +124,10 @@ const onClickTab = () => {
   homeStore.currentPage = 0;
   homeStore.currentCategory = currentCategory.value;
   homeStore.getPetList();
+};
+
+const handleIdentifyPet = () => {
+  recognitionRef.value!.showRecognition = true;
 };
 </script>
 
