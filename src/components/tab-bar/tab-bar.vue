@@ -5,7 +5,7 @@
       <van-tabbar-item replace to="/publish" icon="guide-o">
         发布
       </van-tabbar-item>
-      <van-tabbar-item replace to="/mine" icon="user-o">我的</van-tabbar-item>
+      <van-tabbar-item replace to="/mine" icon="contact">我的</van-tabbar-item>
     </van-tabbar>
   </div>
 </template>

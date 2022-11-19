@@ -26,8 +26,8 @@
         {{ petInfo.sentReason || "暂无弃养原因" }}
       </p>
 
-      <div class="title">送养人信息</div>
-      <place :info="petInfo" />
+      <!-- <div class="title">送养人信息</div> -->
+      <!-- <place :info="petInfo" /> -->
     </div>
 
     <!-- 底部动作栏 -->

@@ -27,7 +27,6 @@
             </van-uploader>
           </template>
         </van-cell>
-        <hr />
         <van-cell title="取消" @click="showRecognition = false" />
       </van-cell-group>
     </van-popup>
@@ -75,7 +74,7 @@ const handleAlbum = (file: any) => {
       showResult.value = true;
       Dialog.alert({
         title: "识别结果",
-        message: `您上传的宠物可能是：${res.result[0].name}`,
+        message: `您上传的宠物可能是：${res.result[0].name}\n温馨提示：识别结果仅供参考`,
       });
     })
     .catch(() => {
