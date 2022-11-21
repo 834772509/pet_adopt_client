@@ -3,6 +3,13 @@
     <!-- 轮播图 -->
     <swipe />
 
+    <van-notice-bar
+      left-icon="volume-o"
+      color="#1989fa"
+      background="#ecf9ff"
+      text="本平台为演示项目，所有数据均来源于互联网，仅供学习和研究使用。"
+    />
+
     <!-- 功能模块 -->
     <van-grid :column-num="3">
       <van-grid-item
