@@ -1,32 +1,31 @@
 <template>
-  <div>
-    <van-overlay :show="show" @click="show = false">
-      <div class="wrapper" @click.stop>
-        <van-loading size="50px" vertical>加载中...</van-loading>
-      </div>
-    </van-overlay>
+  <div class="wrapper" v-if="showLoading">
+    <van-loading size="50px" color="#1989fa" vertical>加载中...</van-loading>
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from "vue";
+import { ref, toRef, watch } from "vue";
 import { useMainStore } from "@/stores";
 
 const mainStore = useMainStore();
-const show = computed(() => mainStore.showLoading);
+const showLoading = ref(false);
+
+watch(toRef(mainStore, "showLoading"), (newValue) => {
+  showLoading.value = newValue;
+});
 </script>
 
 <style scoped>
 .wrapper {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.block {
-  width: 120px;
-  height: 120px;
   background-color: #fff;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  padding: 30px 35px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  z-index: 100;
+  transform: translate(-50%, -50%);
 }
 </style>
