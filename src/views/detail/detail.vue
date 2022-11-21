@@ -21,10 +21,32 @@
         {{ petInfo.adoptRequirement || "暂无领养要求" }}
       </p>
 
-      <div class="title">弃养原因</div>
+      <div class="title">送养原因</div>
       <p class="description">
         {{ petInfo.sentReason || "暂无弃养原因" }}
       </p>
+
+      <div class="title">宠物留言</div>
+      <div class="comment">
+        <van-form @submit="onComment" style="display: flex">
+          <van-field
+            class="input"
+            v-model="comment"
+            style="background-color: #f7f7f7"
+            name="comment"
+            placeholder="说点什么..."
+          />
+          <van-button style="width: 75px" native-type="submit">提交</van-button>
+        </van-form>
+        <div class="comment-list">
+          <comments
+            v-for="item in petCommentList"
+            :key="item.id"
+            :title="item.user.name"
+            :content="item.content"
+          />
+        </div>
+      </div>
 
       <!-- <div class="title">送养人信息</div> -->
       <!-- <place :info="petInfo" /> -->
@@ -76,18 +98,23 @@ import {
   getStarsPetInfo,
   starsPet,
   cancelStarsPet,
+  getCommentList,
+  createComment,
 } from "@/services";
 import { useMainStore } from "@/stores";
 import Share from "@/components/share/share.vue";
 import Pictures from "./components/pictures.vue";
 import MyHeader from "./components/header.vue";
-import Place from "./components/place.vue";
+// import Place from "./components/place.vue";
 import { Toast } from "vant";
 import "vant/es/toast/style";
+import comments from "./components/comments.vue";
 
 const petInfo = ref({}) as any;
+const petCommentList = ref([] as any[]);
 const showShare = ref(false);
 const isStarPet = ref(false);
+const comment = ref("");
 
 const route = useRoute();
 const router = useRouter();
@@ -109,6 +136,12 @@ if (mainStore.token) {
   });
 }
 
+// 获取宠物留言
+getCommentList(id).then((res) => {
+  petCommentList.value = res.data.list;
+});
+
+// 收藏按钮事件
 const handleStar = () => {
   if (!mainStore.token) {
     router.push("/login");
@@ -129,12 +162,28 @@ const handleStar = () => {
     });
   }
 };
+
+// 提交留言事件
+const onComment = () => {
+  createComment(id, comment.value)
+    .then(() => {
+      comment.value = "";
+      getCommentList(id).then((res) => {
+        petCommentList.value = res.data.list;
+      });
+      Toast.success("提交成功");
+    })
+    .catch(() => {
+      Toast.fail("提交失败");
+    });
+};
 </script>
 
 <style lang="less" scoped>
 .detail {
   width: 100%;
   height: 100%;
+
   .content {
     padding: 24px 32px 32px 32px;
     position: relative;
@@ -148,6 +197,9 @@ const handleStar = () => {
     .description {
       color: #666;
       line-height: 25px;
+    }
+    .comment {
+      margin-top: 12px;
     }
   }
 }

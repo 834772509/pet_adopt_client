@@ -3,4 +3,5 @@ export * from "./modules/pets";
 export * from "./modules/picture";
 export * from "./modules/stars";
 export * from "./modules/blacklist";
+export * from "./modules/comments";
 export * from "./modules/ai";
