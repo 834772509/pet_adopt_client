@@ -15,6 +15,9 @@
 
     <!-- 加载框 -->
     <loading />
+
+    <!-- 返回顶部按钮 -->
+    <back-top />
   </div>
 </template>
 
@@ -22,6 +25,7 @@
 import NavBar from "@/components/nav-bar/nav-bar.vue";
 import TabBar from "@/components/tab-bar/tab-bar.vue";
 import Loading from "@/components/loading/loading.vue";
+import backTop from "@/components/backtop/backtop.vue";
 </script>
 
 <style lang="less" scoped>
