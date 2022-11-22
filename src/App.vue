@@ -5,9 +5,10 @@
 
     <!-- App内容 -->
     <router-view v-slot="{ Component }">
-      <keep-alive :exclude="['detail', 'stars']">
-        <component :is="Component" />
-      </keep-alive>
+      <transition :name="$route.meta.transition">
+        <keep-alive :exclude="['detail', 'stars']">
+          <component :is="Component" /> </keep-alive
+      ></transition>
     </router-view>
 
     <!-- 底部导航栏 -->

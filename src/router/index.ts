@@ -60,6 +60,26 @@ const router = createRouter({
       component: () => import("../views/mine/views/stars/stars.vue"),
     },
     {
+      path: "/mine/adopt",
+      name: "mineAdopt",
+      meta: {
+        title: "领养列表",
+        showTabBar: false,
+        keepAlive: false,
+      },
+      component: () => import("../views/mine/views/adopt/adopt.vue"),
+    },
+    {
+      path: "/mine/publish",
+      name: "minePublish",
+      meta: {
+        title: "送养列表",
+        showTabBar: false,
+        keepAlive: false,
+      },
+      component: () => import("../views/mine/views/publish/publish.vue"),
+    },
+    {
       path: "/mine/agreement",
       name: "agreement",
       meta: {
@@ -73,6 +93,7 @@ const router = createRouter({
       name: "contact",
       meta: {
         title: "联系我们",
+        needLogin: false,
         showTabBar: false,
       },
       component: () => import("../views/mine/views/contact/contact.vue"),
@@ -82,6 +103,7 @@ const router = createRouter({
       name: "support",
       meta: {
         title: "支持我们",
+        needLogin: false,
         showTabBar: false,
       },
       component: () => import("../views/support/support.vue"),
@@ -101,6 +123,7 @@ const router = createRouter({
       meta: {
         title: "失信黑名单",
         showTabBar: false,
+        needLogin: false,
       },
       component: () => import("../views/blacklist/blacklist.vue"),
     },
@@ -109,6 +132,7 @@ const router = createRouter({
       name: "blackdetail",
       meta: {
         title: "失信人信息",
+        needLogin: false,
         showTabBar: false,
       },
       component: () => import("../views/black-detail/black-detail.vue"),
@@ -153,5 +177,19 @@ router.beforeEach((to) => {
     }
   }
 });
+
+// 增加路由跳转动画
+// router.afterEach((to, from) => {
+//   const toDepth = to.path.split("/").length;
+//   const fromDepth = from.path.split("/").length;
+
+//   if (toDepth < fromDepth) {
+//     to.meta.transition = "van-slide-right";
+//   } else if (toDepth > fromDepth) {
+//     to.meta.transition = "van-slide-left";
+//   } else {
+//     to.meta.transition = "";
+//   }
+// });
 
 export default router;
