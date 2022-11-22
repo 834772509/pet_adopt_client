@@ -4,6 +4,7 @@ import App from "./App.vue";
 import router from "./router";
 import "@vant/touch-emulator";
 import "normalize.css";
+import "animate.css";
 import "./assets/css/index.less";
 import { useMainStore } from "@/stores";
 

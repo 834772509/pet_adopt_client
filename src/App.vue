@@ -5,7 +5,7 @@
 
     <!-- App内容 -->
     <router-view v-slot="{ Component }">
-      <transition :name="$route.meta.transition">
+      <transition :enter-active-class="$route.meta.transition">
         <keep-alive :exclude="['detail', 'stars']">
           <component :is="Component" /> </keep-alive
       ></transition>
@@ -31,6 +31,7 @@ import backTop from "@/components/backtop/backtop.vue";
 
 <style lang="less" scoped>
 .app {
+  --animate-duration: 0.5s;
   height: 100%;
   background-image: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
 }
