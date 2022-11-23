@@ -2,6 +2,7 @@
   <div>
     <van-share-sheet
       :show="props.show"
+      @update:show="$emit('update:show', false)"
       title="立即分享给好友"
       :options="options"
       @cancel="handleCancel"
