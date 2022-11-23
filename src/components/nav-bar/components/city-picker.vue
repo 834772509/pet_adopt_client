@@ -1,41 +1,44 @@
 <template>
   <div class="field">
-    <van-field
-      is-link
-      readonly
-      placeholder="城市"
-      v-model="currentCity"
-      @click="showCity = true"
-    />
-    <van-popup v-model:show="showCity" round position="bottom">
+    <van-popup
+      :show="props.show"
+      @update:show="$emit('update:show', false)"
+      position="bottom"
+      round
+      lock-scroll
+    >
       <van-picker
         :columns="citys"
-        @cancel="showCity = false"
         @confirm="onCity"
+        @cancel="$emit('update:show', false)"
       />
     </van-popup>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useHomeStore } from "@/stores";
 
-const showCity = ref(false);
+const props = defineProps<{
+  show: boolean;
+  city: string;
+}>();
+const emit = defineEmits(["update:show", "update:city"]);
 
 // 处理宠物城市信息
 const homeStore = useHomeStore();
 homeStore.getPetCitys();
 
 const citys = computed(() => ["全市区", ...homeStore.citys]);
-const currentCity = ref(citys.value[0]);
-homeStore.currentCity = currentCity.value;
+emit("update:city", citys.value[0]);
+homeStore.currentCity = citys.value[0];
 
 // 选择城市列表事件
 const onCity = (value: any) => {
-  currentCity.value = value;
+  emit("update:show", false);
+  emit("update:city", value);
   homeStore.currentCity = value;
-  showCity.value = false;
 
   // 重新加载当前选择城市列表的宠物
   homeStore.petsList.splice(0);
@@ -46,6 +49,5 @@ const onCity = (value: any) => {
 
 <style scoped>
 .field {
-  width: 80px;
 }
 </style>
