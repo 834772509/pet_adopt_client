@@ -8,7 +8,7 @@
       sticky
     >
       <van-tab title="待审核"></van-tab>
-      <van-tab title="领养成功"></van-tab>
+      <van-tab title="已领养"></van-tab>
 
       <van-empty v-if="applyList.length === 0" description="无领养数据" />
 
@@ -17,6 +17,7 @@
           v-model:loading="loading"
           :finished="finished"
           :finished-text="applyList.length === 0 ? '' : '没有更多了'"
+          :immediate-check="false"
           @load="onLoad"
         >
           <van-swipe-cell v-for="item in applyList" :key="item.id">
@@ -87,6 +88,8 @@ const onLoad = () => {
     loading.value = false;
   });
 };
+
+onLoad();
 </script>
 
 <style lang="less" scoped></style>

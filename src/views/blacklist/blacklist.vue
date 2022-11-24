@@ -3,7 +3,7 @@
     <van-tabs
       color="#39a9ed"
       v-model:active="blacklistType"
-      @click-tab="onClickTab"
+      @change="onClickTab"
       offset-top="40px"
       sticky
     >
@@ -16,6 +16,7 @@
           v-model:loading="loading"
           :finished="finished"
           :finished-text="blacklist.length === 0 ? '' : '没有更多了'"
+          :immediate-check="false"
           @load="onLoad"
         >
           <van-swipe-cell v-for="item in blacklist" :key="item.id">
@@ -43,17 +44,18 @@ import { getBlackList } from "@/services";
 import BlacklistItem from "./components/blacklist-item.vue";
 
 const blacklist = ref([] as any[]);
+const blacklistType = ref(0);
+let currentPage = 0;
+
 const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
 
-const blacklistType = ref(0);
+// 标签页改变事件
 const onClickTab = () => {
   refreshing.value = true;
   onRefresh();
 };
-
-let currentPage = 0;
 
 // 上拉刷新事件
 const onRefresh = () => {
@@ -89,6 +91,8 @@ const onLoad = () => {
     loading.value = false;
   });
 };
+
+onLoad();
 </script>
 
 <style lang="less" scoped>

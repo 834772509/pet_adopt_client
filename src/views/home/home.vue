@@ -35,6 +35,7 @@
       />
     </van-grid>
 
+    <!-- 宠物识别框 -->
     <recognition-picker ref="recognitionRef" />
 
     <!-- 宠物类别选项卡 -->
@@ -63,6 +64,7 @@
           v-model:loading="loading"
           :finished="finished"
           :finished-text="homeStore.petsList.length === 0 ? '' : '没有更多了'"
+          :immediate-check="false"
           @load="onLoad"
         >
           <pet-item
@@ -87,8 +89,8 @@ import recognitionPicker from "./components/recognition-picker.vue";
 const homeStore = useHomeStore();
 
 const currentCategory = ref(homeStore.currentCategory);
-const loading = ref(false);
-const finished = ref(false);
+const loading = ref(true);
+const finished = ref(true);
 const refreshing = ref(false);
 
 const recognitionRef = ref();
@@ -96,10 +98,6 @@ const recognitionRef = ref();
 // 处理宠物类别数据
 homeStore.getPetCategory();
 const petsCategory = computed(() => homeStore.category);
-
-watch(toRef(homeStore, "currentPage"), (currentPage, oldPage) => {
-  finished.value = currentPage === oldPage;
-});
 
 // 上拉刷新事件
 const onRefresh = () => {
@@ -119,23 +117,28 @@ const onLoad = () => {
     refreshing.value = false;
   }
 
+  const oldPage = homeStore.currentPage;
+
   // 加载数据
   homeStore.getPetList().then(() => {
     loading.value = false;
+    finished.value = homeStore.currentPage === oldPage;
   });
 };
 
 // 宠物类别点击事件
 const onClickTab = () => {
-  homeStore.petsList.splice(0);
-  homeStore.currentPage = 0;
   homeStore.currentCategory = currentCategory.value;
-  homeStore.getPetList();
+  refreshing.value = true;
+  onRefresh();
 };
 
+// 智能识宠点击事件
 const handleIdentifyPet = () => {
   recognitionRef.value!.showRecognition = true;
 };
+
+onLoad();
 </script>
 
 <style scoped></style>
