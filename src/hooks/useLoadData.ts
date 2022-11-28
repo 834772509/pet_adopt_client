@@ -34,16 +34,21 @@ export function useLoadData(requestFn: (currentPage: number) => Promise<any>) {
     }
 
     // 加载数据
-    requestFn(currentPage).then((data: any) => {
-      if (data.length > 0) {
-        dataList.value.push(...data);
-        currentPage++;
-        finished.value = false;
-      } else {
+    requestFn(currentPage)
+      .then((data: any[]) => {
+        if (data.length > 0) {
+          dataList.value.push(...data);
+          currentPage++;
+          finished.value = false;
+        } else {
+          finished.value = true;
+        }
+        loading.value = false;
+      })
+      .catch(() => {
         finished.value = true;
-      }
-      loading.value = false;
-    });
+        loading.value = false;
+      });
   };
 
   return { dataList, loading, finished, refreshing, onRefresh, onLoad };
