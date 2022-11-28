@@ -80,7 +80,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch, toRef } from "vue";
+import { ref, computed } from "vue";
 import { useHomeStore } from "@/stores";
 import swipe from "./components/swipe.vue";
 import PetItem from "../../components/pet-item/pet-item.vue";

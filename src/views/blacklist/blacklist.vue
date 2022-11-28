@@ -22,7 +22,7 @@
           <van-swipe-cell v-for="item in blacklist" :key="item.id">
             <blacklist-item
               :info="item"
-              @click="$router.push('/blackdetail/' + item.id)"
+              @click="$router.push('/blacklist/' + item.id)"
             />
             <van-divider
               :style="{

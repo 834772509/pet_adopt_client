@@ -62,19 +62,23 @@ const password = ref("");
 
 const loginStore = useMainStore();
 const onSubmit = () => {
-  if (isKeepPassword.value) {
-    // 本地缓存
-    localCache.setCache("name", username.value);
-    localCache.setCache("password", password.value);
-  } else {
-    localCache.deleteCache("name");
-    localCache.deleteCache("password");
-  }
-  loginStore.accountLoginAction(username.value, password.value).catch(() => {
-    Dialog.alert({
-      message: "账号或密码不正确",
+  loginStore
+    .accountLoginAction(username.value, password.value)
+    .then(() => {
+      // 本地缓存
+      if (isKeepPassword.value) {
+        localCache.setCache("name", username.value);
+        localCache.setCache("password", password.value);
+      } else {
+        localCache.deleteCache("name");
+        localCache.deleteCache("password");
+      }
+    })
+    .catch(() => {
+      Dialog.alert({
+        message: "账号或密码不正确",
+      });
     });
-  });
 };
 </script>
 

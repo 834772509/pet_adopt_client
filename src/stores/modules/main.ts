@@ -27,9 +27,8 @@ export const useMainStore = defineStore("main", {
       this.userInfo = userInfoResult.data;
       localCache.setCache("userInfo", userInfoResult.data);
 
-      // 4. 返回上一级路由
-      // router.push("/");
-      router.back();
+      // 4. 跳转至主页
+      router.push("/");
     },
     loadLocalLogin() {
       const expiresAt = localCache.getCache("expiresAt");
