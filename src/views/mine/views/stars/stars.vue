@@ -1,15 +1,15 @@
 <template>
   <div class="stars-list">
-    <van-empty v-if="starsList.length === 0" description="暂无收藏" />
+    <van-empty v-if="dataList.length === 0" description="暂无收藏" />
     <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
       <van-list
         v-model:loading="loading"
         :finished="finished"
-        :finished-text="starsList.length === 0 ? '' : '没有更多了'"
+        :finished-text="dataList.length === 0 ? '' : '没有更多了'"
         :immediate-check="false"
         @load="onLoad"
       >
-        <van-swipe-cell v-for="(item, index) in starsList" :key="item.id">
+        <van-swipe-cell v-for="(item, index) in dataList" :key="item.id">
           <pet-item :info="item" @click="$router.push('/pets/' + item.id)" />
           <template #right>
             <van-button
@@ -32,26 +32,20 @@ import petItem from "@/components/pet-item/pet-item.vue";
 import { useLoadData } from "@/hooks";
 import { Toast } from "vant";
 
-const {
-  dataList: starsList,
-  loading,
-  finished,
-  refreshing,
-  onRefresh,
-  onLoad,
-} = useLoadData((currentPage: number) =>
-  getStarsPetList({
-    offset: currentPage * 10,
-    size: 10,
-  }).then((res) => res.data.list)
-);
+const { dataList, loading, finished, refreshing, onRefresh, onLoad } =
+  useLoadData((currentPage) =>
+    getStarsPetList({
+      offset: currentPage * 10,
+      size: 10,
+    }).then((res) => res.data.list)
+  );
 
 // 删除宠物收藏事件
 const handleDeleteStar = (index: number, id: number) => {
   cancelStarsPet(id).then(() => {
-    starsList.value.splice(index, 1);
+    dataList.value.splice(index, 1);
+    Toast("已取消收藏");
   });
-  Toast("已取消收藏");
 };
 
 onLoad();

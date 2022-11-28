@@ -1,6 +1,11 @@
 import { ref } from "vue";
 
-export function useLoadData(requestFn: any) {
+/**
+ * 加载更多数据（上拉加载更多，下拉刷新）
+ * @param requestFn 请求数据回调函数
+ * @returns 返回: dataList, loading, finished, refreshing, onRefresh, onLoad
+ */
+export function useLoadData(requestFn: (currentPage: number) => Promise<any>) {
   // 数据列表
   const dataList = ref([] as any[]);
   // 当前页数
