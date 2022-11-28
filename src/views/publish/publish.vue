@@ -28,13 +28,14 @@
           /></van-col>
         </van-row>
         <van-field
-          v-model="formInfo.category"
+          v-model="categoryText"
           is-link
           readonly
           name="category"
           label="类别"
           placeholder="请选择宠物类别"
           @click="showCategoryPicker = true"
+          :rules="[{ required: true, message: '请选择宠物类别' }]"
         />
         <van-popup v-model:show="showCategoryPicker" position="bottom">
           <van-picker
@@ -43,43 +44,73 @@
             @cancel="showCategoryPicker = false"
           />
         </van-popup>
-        <van-field name="gender" label-width="50" label="性别">
+        <van-field
+          name="gender"
+          label-width="50"
+          label="性别"
+          type="number"
+          :rules="[{ required: true, message: '请选择宠物性别' }]"
+        >
           <template #input>
-            <van-radio-group v-model="formInfo.gender" direction="horizontal">
-              <van-radio name="1">男孩</van-radio>
-              <van-radio name="0">女孩</van-radio>
+            <van-radio-group
+              v-model.number="formInfo.gender"
+              direction="horizontal"
+            >
+              <van-radio :name="1">男孩</van-radio>
+              <van-radio :name="0">女孩</van-radio>
             </van-radio-group>
           </template>
         </van-field>
 
         <div class="title">宠物现状</div>
-        <van-field name="immunity" label-width="50" label="疫苗">
-          <template #input>
-            <van-radio-group v-model="formInfo.immunity" direction="horizontal">
-              <van-radio name="1">已接种</van-radio>
-              <van-radio name="0">未接种</van-radio>
-              <van-radio name="-1">不详</van-radio>
-            </van-radio-group>
-          </template>
-        </van-field>
-        <van-field name="desex" label-width="50" label="绝育">
-          <template #input>
-            <van-radio-group v-model="formInfo.desex" direction="horizontal">
-              <van-radio name="1">已绝育</van-radio>
-              <van-radio name="0">未绝育</van-radio>
-              <van-radio name="-1">不详</van-radio>
-            </van-radio-group>
-          </template>
-        </van-field>
-        <van-field name="expelling" label-width="50" label="驱虫">
+        <van-field
+          name="immunity"
+          label-width="50"
+          label="疫苗"
+          :rules="[{ required: true, message: '请选择宠物免疫状态' }]"
+        >
           <template #input>
             <van-radio-group
-              v-model="formInfo.expelling"
+              v-model.number="formInfo.immunity"
               direction="horizontal"
             >
-              <van-radio name="1">已驱虫</van-radio>
-              <van-radio name="0">未驱虫</van-radio>
-              <van-radio name="-1">不详</van-radio>
+              <van-radio :name="1">已接种</van-radio>
+              <van-radio :name="0">未接种</van-radio>
+              <van-radio :name="-1">不详</van-radio>
+            </van-radio-group>
+          </template>
+        </van-field>
+        <van-field
+          name="desex"
+          label-width="50"
+          label="绝育"
+          :rules="[{ required: true, message: '请选择宠物绝育状态' }]"
+        >
+          <template #input>
+            <van-radio-group
+              v-model.number="formInfo.desex"
+              direction="horizontal"
+            >
+              <van-radio :name="1">已绝育</van-radio>
+              <van-radio :name="0">未绝育</van-radio>
+              <van-radio :name="-1">不详</van-radio>
+            </van-radio-group>
+          </template>
+        </van-field>
+        <van-field
+          name="expelling"
+          label-width="50"
+          label="驱虫"
+          :rules="[{ required: true, message: '请选择宠物驱虫状态' }]"
+        >
+          <template #input>
+            <van-radio-group
+              v-model.number="formInfo.expelling"
+              direction="horizontal"
+            >
+              <van-radio :name="1">已驱虫</van-radio>
+              <van-radio :name="0">未驱虫</van-radio>
+              <van-radio :name="-1">不详</van-radio>
             </van-radio-group>
           </template>
         </van-field>
@@ -121,13 +152,13 @@
           label="所在地"
           placeholder="请选择所在地"
           @click="showCityArea = true"
+          :rules="[{ required: true, message: '请选择所在地' }]"
         />
         <van-popup v-model:show="showCityArea" position="bottom">
           <van-area
             :area-list="areaList"
             @confirm="onConfirm"
             @cancel="showCityArea = false"
-            :columns-placeholder="['请选择']"
           />
         </van-popup>
         <van-field
@@ -139,7 +170,7 @@
           :rules="[{ required: true, message: '请填写手机号' }]"
         />
         <van-field
-          v-model="formInfo.telephone"
+          v-model="formInfo.wechat"
           label-width="50"
           name="wechat"
           label="微信号"
@@ -160,38 +191,52 @@
 </template>
 
 <script setup lang="ts">
-import { reactive, ref, computed } from "vue";
-import { useHomeStore } from "@/stores";
+import "vant/es/toast/style";
+import { reactive, ref, computed, toRaw } from "vue";
+import { useRouter } from "vue-router";
+import { useMainStore, useHomeStore } from "@/stores";
 import { areaList } from "@vant/area-data";
 import { Toast } from "vant";
-import "vant/es/toast/style";
+import { publishPet, uploadPicture } from "@/services";
 
-// 宠物类别数据
+const mainStore = useMainStore();
 const homeStore = useHomeStore();
-const categoryList = computed(() =>
-  homeStore.category.map((item) => item.name)
-);
+
+const router = useRouter();
+
+// 图片上传
+const afterRead = (uploadData: any) => {
+  // 此时可以将文件上传至服务器
+  let fileData = toRaw(uploadData);
+
+  if (fileData instanceof Array) {
+    fileData = fileData.map((item) => item.file);
+  } else {
+    fileData = fileData.file;
+  }
+
+  uploadPicture(fileData).then((res) => {
+    const fileList = res.data.map((item: any) => item.filename);
+    formInfo.pictures = JSON.stringify(fileList);
+  });
+};
 
 // 表单数据
 const fileList = ref([] as any[]);
 const showCategoryPicker = ref(false);
 const isAgreeAgreemen = ref(false);
 
-const result = ref("");
-const showCityArea = ref(false);
-const onConfirm = (areaValues: any) => {
-  showCityArea.value = false;
-  result.value = areaValues
-    .filter((item: any) => !!item)
-    .map((item: any) => item.name)
-    .join("");
-};
-
+// 表单数据
 const formInfo = reactive({
+  userId: mainStore.userInfo.id,
   name: "",
   gender: null,
   age: "",
-  category: "",
+  categoryId: -1,
+  pictures: "",
+  province: null,
+  city: null,
+  county: null,
   immunity: null,
   desex: null,
   expelling: null,
@@ -201,27 +246,64 @@ const formInfo = reactive({
   wechat: "",
 });
 
+// 宠物类别数据
+const categoryList = computed(() =>
+  homeStore.category.map((item) => item.name)
+);
+
+// 显示宠物分类列表
+const categoryText = ref("");
 const onCategoryConfirm = (value: any) => {
-  formInfo.category = value;
+  categoryText.value = value;
+  formInfo.categoryId = categoryList.value.indexOf(value);
   showCategoryPicker.value = false;
 };
 
-const onSubmit = (values: any) => {
+// 显示城市列表
+const result = ref("");
+const showCityArea = ref(false);
+const onConfirm = (areaValues: any) => {
+  showCityArea.value = false;
+  const cityData = areaValues
+    .filter((item: any) => !!item)
+    .map((item: any) => item.name);
+  result.value = cityData.join("");
+  [formInfo.province, formInfo.city, formInfo.county] = cityData;
+};
+
+// 提交送养信息
+const onSubmit = () => {
   if (isAgreeAgreemen.value !== true) {
     Toast("同意《拾宠领养平台送养规则》才可提交");
     return;
   }
-  console.log("submit", values);
+
+  Toast.loading({
+    message: "正在提交...",
+    forbidClick: true,
+  });
+
+  publishPet(formInfo)
+    .then(() => {
+      Toast.clear();
+      Toast.success("提交成功");
+      resetFormData();
+      router.push(`/mine/publish`);
+    })
+    .catch(() => {
+      Toast.clear();
+      Toast.success("送养信息提交失败，请重试");
+    });
 };
 
-const afterRead = (file: any) => {
-  // 此时可以自行将文件上传至服务器
-  console.log(file);
-
-  // fileList.value.push({
-  //   url: "https://fastly.jsdelivr.net/npm/@vant/assets/leaf.jpeg",
-  //   isImage: true,
-  // });
+// 重置表单数据
+const resetFormData = () => {
+  const keys = Object.keys(formInfo);
+  let obj: { [name: string]: string } = {};
+  keys.forEach((item) => {
+    obj[item] = "";
+  });
+  Object.assign(formInfo, obj);
 };
 </script>
 
