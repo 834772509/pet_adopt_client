@@ -255,7 +255,7 @@ const categoryList = computed(() =>
 const categoryText = ref("");
 const onCategoryConfirm = (value: any) => {
   categoryText.value = value;
-  formInfo.categoryId = categoryList.value.indexOf(value);
+  formInfo.categoryId = categoryList.value.indexOf(value) + 1;
   showCategoryPicker.value = false;
 };
 

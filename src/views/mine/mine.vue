@@ -15,18 +15,19 @@
 
     <!-- 功能导航 -->
     <div class="container">
-      <router-link class="my-item" to="">
-        <!-- <img src="@/assets/images/my_icon_place.png" alt="" /> -->
+      <router-link class="my-item" to="/mine/publish">
         <van-icon color="#1989fa" name="bookmark" size="35" />
         <span>送养</span>
       </router-link>
+      <router-link class="my-item" to="/mine/apply">
+        <van-icon color="#1989fa" name="invitation" size="35" />
+        <span>申请</span>
+      </router-link>
       <router-link class="my-item" to="/mine/adopt">
-        <!-- <img src="@/assets/images/my_icon_adopt.png" alt="" /> -->
         <van-icon color="#1989fa" name="medal" size="35" />
         <span>领养</span>
       </router-link>
       <router-link class="my-item" to="/mine/stars">
-        <!-- <img src="@/assets/images/my_icon_favor.png" alt="" /> -->
         <van-icon name="star" color="#1989fa" size="35" />
         <span>收藏</span>
       </router-link>
@@ -41,12 +42,18 @@
     />
 
     <!-- 领养协议、关于我们 -->
-    <van-grid :column-num="2" icon-size="35">
+    <van-grid :column-num="3" icon-size="35">
       <van-grid-item
         icon="label"
         icon-color="#1989fa"
         text="领养协议"
         to="/mine/agreement"
+      />
+      <van-grid-item
+        icon="thumb-circle"
+        icon-color="#1989fa"
+        text="支持我们"
+        to="/support"
       />
       <van-grid-item
         icon="comment-circle"
