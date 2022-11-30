@@ -70,6 +70,16 @@ const router = createRouter({
       component: () => import("../views/mine/views/adopt/adopt.vue"),
     },
     {
+      path: "/mine/apply",
+      name: "mineApply",
+      meta: {
+        title: "领养申请",
+        showTabBar: false,
+        keepAlive: false,
+      },
+      component: () => import("../views/mine/views/apply/apply.vue"),
+    },
+    {
       path: "/mine/publish",
       name: "minePublish",
       meta: {
@@ -128,7 +138,7 @@ const router = createRouter({
       component: () => import("../views/blacklist/blacklist.vue"),
     },
     {
-      path: "/blackdetail/:id",
+      path: "/blacklist/:id",
       name: "blackdetail",
       meta: {
         title: "失信人信息",
@@ -161,6 +171,7 @@ const router = createRouter({
       name: "notFound",
       path: "/:pathMatch(.*)*",
       meta: {
+        title: "找不到页面",
         showTabBar: true,
       },
       component: () => import("@/views/not-found/not-found.vue"),
@@ -184,9 +195,9 @@ router.beforeEach((to) => {
 //   const fromDepth = from.path.split("/").length;
 
 //   if (toDepth < fromDepth) {
-//     to.meta.transition = "van-slide-right";
+//     to.meta.transition = "animate__animated animate__slideInLeft";
 //   } else if (toDepth > fromDepth) {
-//     to.meta.transition = "van-slide-left";
+//     to.meta.transition = "animate__animated animate__slideInRight";
 //   } else {
 //     to.meta.transition = "";
 //   }
