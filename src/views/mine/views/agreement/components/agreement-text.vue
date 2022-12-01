@@ -4,7 +4,7 @@
       <van-icon color="blue" name="orders-o" />
       <span>{{ props.title }}</span>
     </div>
-    <pre class="content">{{ props.content }}</pre>
+    <p class="content">{{ props.content }}</p>
     <van-divider
       :hairline="false"
       :style="{ bordercolor: '#f6f8fc', padding: '0 10px' }"
