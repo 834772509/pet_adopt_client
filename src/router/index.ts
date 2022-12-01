@@ -80,6 +80,17 @@ const router = createRouter({
       component: () => import("../views/mine/views/apply/apply.vue"),
     },
     {
+      path: "/mine/apply/:id",
+      name: "mineApplyDetail",
+      meta: {
+        title: "申请详情",
+        showTabBar: false,
+        keepAlive: false,
+      },
+      component: () =>
+        import("../views/mine/views/apply-detail/apply-detail.vue"),
+    },
+    {
       path: "/mine/publish",
       name: "minePublish",
       meta: {

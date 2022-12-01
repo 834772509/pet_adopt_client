@@ -20,7 +20,12 @@
           @load="onLoad"
         >
           <van-swipe-cell v-for="item in dataList" :key="item.id">
-            <apply-item :id="item.id" :user="item.user" :pet="item.pet" />
+            <apply-item
+              :id="item.id"
+              :user="item.user"
+              :pet="item.pet"
+              @click="$router.push('/mine/apply/' + item.id)"
+            />
 
             <!-- 滑动右侧操作栏 -->
             <template #right>
