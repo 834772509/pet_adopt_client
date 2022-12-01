@@ -68,20 +68,20 @@
       <van-action-bar-button
         :type="
           petInfo.status === -1
-            ? 'primary'
-            : petInfo.status === 0
             ? 'warning'
+            : petInfo.status === 0
+            ? 'primary'
             : 'success'
         "
         :text="
           petInfo.status === -1
-            ? '申请领养'
-            : petInfo.status === 0
             ? '正在审核'
+            : petInfo.status === 0
+            ? '申请领养'
             : '已被领养'
         "
         :url="'/pets/' + id + '/adopt'"
-        :disabled="petInfo.status !== -1"
+        :disabled="petInfo.status !== 0"
       />
     </van-action-bar>
 

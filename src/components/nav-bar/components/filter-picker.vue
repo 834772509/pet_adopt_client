@@ -137,12 +137,16 @@ const onFilter = () => {
 
   // 设置筛选数据
   homeStore.age = filter.childhood
-    ? [0, 12]
+    ? // 幼年
+      [0, 11]
     : filter.youth
-    ? [12, 72]
-    : filter.adult
+    ? // 青年
+      [12, 72]
+    : // 成年
+    filter.adult
     ? [72, 120]
-    : filter.old
+    : // 老年
+    filter.old
     ? [120, 600]
     : [];
   homeStore.gender =

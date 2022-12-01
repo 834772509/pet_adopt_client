@@ -2,7 +2,7 @@
   <div class="field">
     <!-- 选择图片方式 -->
     <van-popup
-      :show="showRecognition"
+      v-model:show="showRecognition"
       position="bottom"
       safe-area-inset-bottom
       round

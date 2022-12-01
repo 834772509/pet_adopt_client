@@ -27,39 +27,17 @@
         </div>
       </div>
     </div>
-
-    <!-- <div class="action">
-      <van-button
-        class="button"
-        type="primary"
-        text="通过"
-        square
-        block
-        @click="handleAgree"
-      />
-    </div> -->
   </div>
 </template>
 
 <script setup lang="ts">
 import { formatAge } from "@/utils/utils";
-import { Dialog } from "vant";
 
 const props = defineProps<{
   id: number;
   user: any;
   pet: any;
 }>();
-
-// 通过按钮点击事件
-const handleAgree = () => {
-  Dialog.confirm({
-    title: "提示",
-    message: "是否确认此用户领养？",
-  }).then(() => {
-    console.log(props.id);
-  });
-};
 </script>
 
 <style lang="less" scoped>

@@ -1,6 +1,6 @@
 <template>
   <div class="pet-item">
-    <van-card :thumb="JSON.parse(props.info.pictures)[0] || 'null'">
+    <van-card :thumb="JSON.parse(props.info.pictures || '[]')[0] || 'null'">
       <!-- 宠物名称 -->
       <template #title>
         <div class="title">{{ props.info.name }}</div>
@@ -19,9 +19,9 @@
             {{ props.info.county }}
           </van-tag>
         </div>
-        <p class="desc van-multi-ellipsis--l2">
+        <div class="desc van-multi-ellipsis--l2">
           {{ props.info.description || "暂无描述" }}
-        </p>
+        </div>
       </template>
 
       <!-- 宠物状态 -->
@@ -75,14 +75,17 @@ const props = defineProps({
     font-weight: bold;
   }
   .desc {
+    min-height: 30px;
+    margin: 10px 0;
     font-size: 14px;
     color: #757575;
   }
   .tags {
     display: flex;
     justify-content: left;
-    margin-top: 8px;
+    margin-top: 5px;
     --van-tag-padding: 2px 5px 2px 5px;
+
     .tag {
       margin-right: 8px;
     }

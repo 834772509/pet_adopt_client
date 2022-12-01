@@ -1,11 +1,14 @@
 import { ref } from "vue";
 
 /**
- * 加载更多数据（上拉加载更多，下拉刷新）
+ * 加载更多数据（上拉加载更多，下拉刷新相关逻辑）
  * @param requestFn 请求数据回调函数
  * @returns 返回: dataList, loading, finished, refreshing, onRefresh, onLoad
  */
-export function useLoadData(requestFn: (currentPage: number) => Promise<any>) {
+export function useLoadData(
+  requestFn: (currentPage: number) => Promise<any>,
+  size: number = 10
+) {
   // 数据列表
   const dataList = ref([] as any[]);
   // 当前页数
@@ -39,7 +42,9 @@ export function useLoadData(requestFn: (currentPage: number) => Promise<any>) {
         if (data.length > 0) {
           dataList.value.push(...data);
           currentPage++;
-          finished.value = false;
+
+          // const size = dataList.value.length / currentPage;
+          finished.value = data.length < size;
         } else {
           finished.value = true;
         }

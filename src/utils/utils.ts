@@ -12,5 +12,5 @@ export function formatAge(age: any) {
 
 // 获取静态资源图片
 export function getAssetsImage(name: string) {
-  return new URL(`../assets/images/${name}.png`, import.meta.url).href;
+  return new URL(`../assets/images/${name}`, import.meta.url).href;
 }

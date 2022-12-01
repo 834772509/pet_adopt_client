@@ -170,7 +170,6 @@ const onSubmit = (values: any) => {
 <style lang="less" scoped>
 .adopt {
   background-color: #fff;
-  height: 100%;
 
   .tips {
     color: #666;

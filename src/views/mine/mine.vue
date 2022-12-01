@@ -5,7 +5,7 @@
       <van-image
         width="4rem"
         height="4rem"
-        src="https://fastly.jsdelivr.net/npm/@vant/assets/cat.jpeg"
+        :src="getAssetsImage('avatar-default.jpg')"
         round
       />
       <div class="info">
@@ -79,6 +79,7 @@
 import { ref } from "vue";
 import { useMainStore } from "@/stores";
 import share from "@/components/share/share.vue";
+import { getAssetsImage } from "@/utils/utils";
 
 const showShare = ref(false);
 

@@ -28,14 +28,14 @@
             />
 
             <!-- 滑动右侧操作栏 -->
-            <template #right>
+            <!-- <template #right>
               <van-button
                 square
                 text="通过"
                 type="primary"
                 class="agree-button"
               />
-            </template>
+            </template> -->
           </van-swipe-cell>
         </van-list>
       </van-pull-refresh>
