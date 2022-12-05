@@ -6,7 +6,9 @@
     <!-- App内容 -->
     <router-view v-slot="{ Component }">
       <keep-alive :exclude="excludeList">
-        <transition :enter-active-class="$route.meta.transition">
+        <transition
+          :enter-active-class="$route.meta?.transition as string || ''"
+        >
           <component :is="Component" />
         </transition>
       </keep-alive>

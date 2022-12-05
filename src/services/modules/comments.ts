@@ -3,8 +3,9 @@ import request from "../request";
 // 创建评论
 export function createComment(petId: number, content: string) {
   return request.post({
-    url: `/comments/${petId}`,
+    url: `/comments`,
     data: {
+      petId,
       content,
     },
   });

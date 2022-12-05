@@ -2,6 +2,7 @@ import { fileURLToPath, URL } from "node:url";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
+import legacy from "@vitejs/plugin-legacy";
 import Components from "unplugin-vue-components/vite";
 import { VantResolver } from "unplugin-vue-components/resolvers";
 import progress from "vite-plugin-progress";
@@ -13,11 +14,13 @@ export default defineConfig({
   },
   plugins: [
     progress(),
+    legacy({
+      targets: ["defaults", "not IE 11"],
+    }),
     vue(),
     Components({
       resolvers: [VantResolver()],
     }),
-    progress(),
   ],
   css: {
     postcss: {
