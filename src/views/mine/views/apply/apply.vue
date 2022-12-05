@@ -8,7 +8,9 @@
       sticky
     >
       <van-tab title="待审核"></van-tab>
-      <van-tab title="已送养"></van-tab>
+      <van-tab title="已领养"></van-tab>
+      <van-tab title="已失效"></van-tab>
+
       <van-empty v-if="dataList.length === 0" description="无领养数据" />
 
       <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
@@ -57,10 +59,23 @@ const onChangeTab = () => {
   onRefresh();
 };
 
+let state: number;
+switch (active.value) {
+  case 0:
+    state = 0;
+    break;
+  case 1:
+    state = 1;
+    break;
+  case 2:
+    state = -1;
+    break;
+}
+
 const { dataList, loading, finished, refreshing, onRefresh, onLoad } =
   useLoadData((currentPage) =>
     getApplyAdoptList({
-      state: active.value,
+      state: state,
       offset: currentPage * 10,
       size: 10,
     }).then((res) => res.data.list)
