@@ -147,7 +147,7 @@ const onSubmit = (values: any) => {
   const data = {
     userId: mainStore.userInfo.id,
     petId: id,
-    state: 0,
+    state: -1,
     ...values,
   };
 

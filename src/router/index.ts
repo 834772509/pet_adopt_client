@@ -63,7 +63,7 @@ const router = createRouter({
       path: "/mine/adopt",
       name: "mineAdopt",
       meta: {
-        title: "领养列表",
+        title: "我发出的领养申请",
         showTabBar: false,
         keepAlive: false,
       },
@@ -73,7 +73,7 @@ const router = createRouter({
       path: "/mine/apply",
       name: "mineApply",
       meta: {
-        title: "领养申请",
+        title: "我收到的领养申请",
         showTabBar: false,
         keepAlive: false,
       },

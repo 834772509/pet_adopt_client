@@ -5,11 +5,12 @@
       <van-cell title="姓名" :value="user?.name" />
       <van-cell title="性别" :value="user?.sex === 1 ? '男' : '女'" />
       <van-cell title="年龄" :value="user?.age" />
+      <van-cell title="电话号码" :value="applyData?.telephone" />
+      <van-cell title="所在地区" :value="applyData.address" />
       <van-cell
         title="养宠经验"
         :value="applyData.isExperience === 1 ? '有' : '无'"
       />
-      <van-cell title="所在地区" :value="applyData.address" />
       <van-cell
         title="婚姻状况"
         :value="applyData.isMarriage === 1 ? '已婚' : '未婚'"

@@ -16,6 +16,14 @@ export function getApplyAdoptList(query?: any) {
   });
 }
 
+// 获取领养信息列表
+export function getAdoptList(query?: any) {
+  return request.post({
+    url: "/adopt/list",
+    data: query,
+  });
+}
+
 // 获取领养宠物列表-通过id
 export function getApplyAdoptDetailById(id: number) {
   return request.get({

@@ -7,6 +7,7 @@
       @change="onChangeTab"
       sticky
     >
+      <van-tab title="待初核"></van-tab>
       <van-tab title="待审核"></van-tab>
       <van-tab title="已领养"></van-tab>
 
@@ -35,7 +36,7 @@
 import { ref } from "vue";
 import { useMainStore } from "@/stores";
 import { useLoadData } from "@/hooks";
-import { getApplyAdoptList } from "@/services";
+import { getAdoptList } from "@/services";
 import PetItem from "@/components/pet-item/pet-item.vue";
 
 const mainStore = useMainStore();
@@ -43,9 +44,9 @@ const active = ref(0);
 
 const { dataList, loading, finished, refreshing, onRefresh, onLoad } =
   useLoadData((currentPage) =>
-    getApplyAdoptList({
+    getAdoptList({
       userId: mainStore.userInfo.id,
-      state: active.value,
+      state: active.value - 1,
       offset: currentPage * 10,
       size: 10,
     }).then((res) => res.data.list)

@@ -52,30 +52,21 @@ import { getApplyAdoptList } from "@/services";
 import applyItem from "@/components/apply-item/apply-item.vue";
 
 const active = ref(0);
+const state = ref(0);
 
 // 标签页改变事件
 const onChangeTab = () => {
   refreshing.value = true;
+  state.value = active.value == 0 || active.value == 1 ? active.value : -1;
   onRefresh();
 };
 
-let state: number;
-switch (active.value) {
-  case 0:
-    state = 0;
-    break;
-  case 1:
-    state = 1;
-    break;
-  case 2:
-    state = -1;
-    break;
-}
+state.value = active.value == 0 || active.value == 1 ? active.value : -1;
 
 const { dataList, loading, finished, refreshing, onRefresh, onLoad } =
   useLoadData((currentPage) =>
     getApplyAdoptList({
-      state: state,
+      state: state.value,
       offset: currentPage * 10,
       size: 10,
     }).then((res) => res.data.list)
